@@ -56,7 +56,7 @@ const Small = styled('small')(({ bgcolor }) => ({
 
 const centreList = centreStore.centreList
 
-const TopSellingTable = ({ selectStore }) => {
+const CentresTable = ({ selectStore }) => {
   const { palette } = useTheme()
   const bgError = palette.error.main
   const bgPrimary = palette.primary.main
@@ -128,4 +128,4 @@ const TopSellingTable = ({ selectStore }) => {
   )
 }
 
-export default observer(TopSellingTable)
+export default observer(CentresTable)
