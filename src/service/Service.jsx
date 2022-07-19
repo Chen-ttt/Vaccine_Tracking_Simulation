@@ -2,11 +2,11 @@
  * @Description: Main page of service which includes Centre Table and Delivery Form
  * @Author: Tong Chen
  * @Date: 2022-07-18 21:42:35
- * @LastEditTime: 2022-07-19 17:37:42
+ * @LastEditTime: 2022-07-19 17:39:23
  * @LastEditors:
  */
 
-import TopSellingTable from './TopSellingTable'
+import CentresTable from './CentresTable'
 import DeliveryForm from './DeliveryForm'
 import SimpleCard from '../components/SimpleCard'
 import { Fragment } from 'react'
@@ -26,7 +26,7 @@ function Service() {
       <ContentBox>
         <Grid container spacing={3}>
           <Grid item xs={12} md={8}>
-            <TopSellingTable selectStore={selectStore} />
+            <CentresTable selectStore={selectStore} />
           </Grid>
           <Grid item xs={12} md={4}>
             {selectStore.choice.appear ? (
