@@ -2,7 +2,7 @@
  * @Description:
  * @Author: Tong Chen
  * @Date: 2022-07-18 21:13:55
- * @LastEditTime: 2022-07-19 16:06:09
+ * @LastEditTime: 2022-07-19 17:44:57
  * @LastEditors:
  */
 import { Button, Card, styled } from '@mui/material'
@@ -33,7 +33,7 @@ const UpgradeCard = () => {
   return (
     <CardRoot>
       <StyledCard elevation={0}>
-        <img src="/bookIcon.png" alt="404" height={50} />
+        <img src="/icon/bookIcon.png" alt="404" height={50} />
 
         <Paragraph>
           Not get <b>Vaccine</b> yet? <br /> Take Vaccine to protexct yourself.
