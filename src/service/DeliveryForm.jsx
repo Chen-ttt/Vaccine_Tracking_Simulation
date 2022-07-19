@@ -24,6 +24,7 @@ const DeliveryForm = ({ centreName, formStore, selectStore }) => {
     return () => ValidatorForm.removeValidationRule('isPasswordMatch')
   }, [state.password])
 
+  // set information into formStore and send email to centre to remind the delivery
   const handleSubmit = (event) => {
     console.log('Form submitted', event.target)
     formStore.setForm(centreName, state)
