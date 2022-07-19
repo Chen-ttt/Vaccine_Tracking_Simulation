@@ -1,8 +1,8 @@
 /*
- * @Description: 
+ * @Description: Database of Centres & Set Timer to simulate vaccine consumption
  * @Author: Tong Chen
  * @Date: 2022-07-19 01:50:57
- * @LastEditTime: 2022-07-19 17:00:03
+ * @LastEditTime: 2022-07-19 17:29:57
  * @LastEditors:  
  */
 import { makeAutoObservable } from "mobx"
