@@ -1,8 +1,8 @@
 /*
- * @Description: 
+ * @Description: Form Store to Send Supply Email
  * @Author: Tong Chen
  * @Date: 2022-07-18 23:05:35
- * @LastEditTime: 2022-07-19 16:11:23
+ * @LastEditTime: 2022-07-19 17:30:32
  * @LastEditors:  
  */
 import { makeAutoObservable } from "mobx"
