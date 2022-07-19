@@ -1,8 +1,8 @@
 /*
- * @Description: 
+ * @Description: Email Store for Sending Request Email to Manufacture
  * @Author: Tong Chen
  * @Date: 2022-07-19 00:42:18
- * @LastEditTime: 2022-07-19 16:04:27
+ * @LastEditTime: 2022-07-19 17:31:11
  * @LastEditors:  
  */
 
