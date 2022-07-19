@@ -5,8 +5,6 @@ import ReactEcharts from 'echarts-for-react'
 function PieChart ({ height, color = [] }) {
   const theme = useTheme()
 
-  console.log('theme', theme)
-
   const option = {
     legend: {
       show: true,
