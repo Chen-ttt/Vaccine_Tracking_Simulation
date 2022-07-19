@@ -1,8 +1,8 @@
 /*
- * @Description: router
+ * @Description: router for User
  * @Author: Tong Chen
  * @Date: 2022-07-18 21:49:58
- * @LastEditTime: 2022-07-19 16:02:13
+ * @LastEditTime: 2022-07-19 17:51:52
  * @LastEditors:  
  */
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
