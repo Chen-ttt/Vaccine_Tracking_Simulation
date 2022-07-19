@@ -1,8 +1,8 @@
 /*
- * @Description: 
+ * @Description: Render A List of Centre Cards with Responsive Data
  * @Author: Tong Chen
  * @Date: 2022-07-18 18:00:33
- * @LastEditTime: 2022-07-19 16:06:00
+ * @LastEditTime: 2022-07-19 17:48:38
  * @LastEditors:  
  */
 
@@ -12,7 +12,7 @@ import { centreStore } from "../store/CentreStore"
 import { observer } from 'mobx-react-lite'
 
 const StyledCard = styled(Card)(({ theme }) => ({
-  height: '100px',
+  height: '110px',
   display: 'flex',
   flexWrap: 'wrap',
   alignItems: 'center',
@@ -59,7 +59,7 @@ function CenterCard () {
               <Tooltip title="View Details" placement="top">
                 <IconButton>
                   {/* <Icon>arrow_right_alt</Icon> */}
-                  <img src="/arrowIcon.png" alt="404" height={30} />
+                  <img src="/icon/arrowIcon.png" alt="404" height={30} />
                 </IconButton>
               </Tooltip>
             </StyledCard>
