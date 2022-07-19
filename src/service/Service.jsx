@@ -1,8 +1,8 @@
 /*
- * @Description:
+ * @Description: Main page of service which includes Centre Table and Delivery Form
  * @Author: Tong Chen
  * @Date: 2022-07-18 21:42:35
- * @LastEditTime: 2022-07-19 16:14:09
+ * @LastEditTime: 2022-07-19 17:37:42
  * @LastEditors:
  */
 
