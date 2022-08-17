@@ -2,14 +2,18 @@
  * @Description: Render A List of Centre Cards with Responsive Data
  * @Author: Tong Chen
  * @Date: 2022-07-18 18:00:33
- * @LastEditTime: 2022-07-19 17:48:38
+ * @LastEditTime: 2022-08-17 16:28:00
  * @LastEditors:  
  */
 
 import { Box, styled, Grid, Card, Button, IconButton, Tooltip } from '@mui/material'
 import { Small, H6, Paragraph } from '../components/Typography'
-import { centreStore } from "../store/CentreStore"
-import { observer } from 'mobx-react-lite'
+// import { centreStore } from "../store/CentreStore"
+// import { observer } from 'mobx-react-lite'
+import { connect } from 'react-redux'
+import { getCentreDB } from '../actions/consumeAction'
+import { useEffect } from 'react'
+// import centreData from "../mockDatabase/centresDB"
 
 const StyledCard = styled(Card)(({ theme }) => ({
   height: '110px',
@@ -38,12 +42,25 @@ const Heading = styled('h6')(({ theme }) => ({
   color: theme.palette.primary.main,
 }))
 
-function CenterCard () {
+function CenterCard (props) {
+  console.log("props", props)
+  const { state, get } = props
+  // // get()
+  const centreInfo = state.centreInfo
+
+  // const centreInfo = [
+  //   {
+  //     name: "ll",
+  //     openTime: "00",
+  //     initVaccine: 12,
+  //     distance: "0.7"
+  //   }
+  // ]
 
   return (
     <>
       <Grid container spacing={3} sx={{ mb: '24px' }}>
-        {centreStore.centreList.map((item, index) => (
+        {centreInfo ? centreInfo.map((item, index) => (
           <Grid item xs={12} md={6} key={index}>
             <StyledCard elevation={6}>
               <InfoBox>
@@ -51,7 +68,7 @@ function CenterCard () {
                   <H6>{item.name}</H6>
                   <Small>{item.openTime}</Small>
                   <br></br>
-                  <Heading>{item.amount} available</Heading>
+                  <Heading>{item.initVaccine} available</Heading>
                   <Paragraph>{item.distance} miles away</Paragraph>
                 </Box>
               </InfoBox>
@@ -64,9 +81,9 @@ function CenterCard () {
               </Tooltip>
             </StyledCard>
           </Grid>
-        ))}
+        )) : null}
       </Grid>
-      <Button
+      {/* <Button
         size="small"
         height="10"
         padding="24px"
@@ -75,9 +92,24 @@ function CenterCard () {
         sx={{ textTransform: 'uppercase' }}
         onClick={() => centreStore.stopConsumption()}>
         STOP
-      </Button>
+      </Button> */}
     </>
   )
 }
 
-export default observer(CenterCard)
+const mapStateToProps = (state) => {
+  console.log("state", state)
+  return ({
+    state: state
+  })
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return ({
+    get: () => dispatch(getCentreDB())
+  })
+}
+
+// export default observer(CenterCard)
+// export default CenterCard
+export default connect(mapStateToProps, mapDispatchToProps)(CenterCard)
