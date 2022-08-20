@@ -2,18 +2,16 @@
  * @Description: Render A List of Centre Cards with Responsive Data
  * @Author: Tong Chen
  * @Date: 2022-07-18 18:00:33
- * @LastEditTime: 2022-08-17 16:28:00
+ * @LastEditTime: 2022-08-20 00:16:44
  * @LastEditors:  
  */
 
 import { Box, styled, Grid, Card, Button, IconButton, Tooltip } from '@mui/material'
 import { Small, H6, Paragraph } from '../components/Typography'
-// import { centreStore } from "../store/CentreStore"
-// import { observer } from 'mobx-react-lite'
 import { connect } from 'react-redux'
-import { getCentreDB } from '../actions/consumeAction'
+import { initCentreDB, clearAction } from '../actions/consumeAction'
 import { useEffect } from 'react'
-// import centreData from "../mockDatabase/centresDB"
+import { centreStore } from '../store/centreStore'
 
 const StyledCard = styled(Card)(({ theme }) => ({
   height: '110px',
@@ -44,18 +42,8 @@ const Heading = styled('h6')(({ theme }) => ({
 
 function CenterCard (props) {
   console.log("props", props)
-  const { state, get } = props
-  // // get()
+  const { state, get, clearTimer, show } = props
   const centreInfo = state.centreInfo
-
-  // const centreInfo = [
-  //   {
-  //     name: "ll",
-  //     openTime: "00",
-  //     initVaccine: 12,
-  //     distance: "0.7"
-  //   }
-  // ]
 
   return (
     <>
@@ -83,22 +71,23 @@ function CenterCard (props) {
           </Grid>
         )) : null}
       </Grid>
-      {/* <Button
+
+      <Button
         size="small"
         height="10"
         padding="24px"
         color="primary"
         variant="contained"
         sx={{ textTransform: 'uppercase' }}
-        onClick={() => centreStore.stopConsumption()}>
+        onClick={() => clearTimer()}>
         STOP
-      </Button> */}
+      </Button>
     </>
   )
 }
 
 const mapStateToProps = (state) => {
-  console.log("state", state)
+  console.log("state change", state)
   return ({
     state: state
   })
@@ -106,10 +95,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return ({
-    get: () => dispatch(getCentreDB())
+    get: () => dispatch(initCentreDB()),
+    clearTimer: () => dispatch(clearAction()),
+    show: () => console.log(centreStore.getState())
   })
 }
 
-// export default observer(CenterCard)
-// export default CenterCard
 export default connect(mapStateToProps, mapDispatchToProps)(CenterCard)
