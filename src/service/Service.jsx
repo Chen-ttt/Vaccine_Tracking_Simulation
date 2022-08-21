@@ -2,7 +2,7 @@
  * @Description: Main page of service which includes Centre Table and Delivery Form
  * @Author: Tong Chen
  * @Date: 2022-07-18 21:42:35
- * @LastEditTime: 2022-07-19 17:39:23
+ * @LastEditTime: 2022-08-15 19:40:45
  * @LastEditors:
  */
 
@@ -10,7 +10,7 @@ import CentresTable from './CentresTable'
 import DeliveryForm from './DeliveryForm'
 import SimpleCard from '../components/SimpleCard'
 import { Fragment } from 'react'
-import { ContentBox } from '../App'
+import { ContentBox } from '../views/App'
 import { Stack, Grid } from '@mui/material'
 import { observer } from 'mobx-react-lite'
 
