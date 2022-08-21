@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-02 00:30:20
- * @LastEditTime: 2022-08-13 16:17:43
+ * @LastEditTime: 2022-08-21 18:58:14
  * @LastEditors:  
  */
 
@@ -16,14 +16,20 @@ function Router () {
       <Routes>
         {
           routeConfig.map((config) => {
-            const { element: Element, path, ...otherProps } = config
+            const { element: Element, path, subRoutes, ...otherProps } = config
             return (
               <Route
                 key={path}
                 path={path}
                 element={<Element />}
-                {...otherProps}
-              />
+              >
+                {subRoutes ? subRoutes.map(item => (
+                  <Route
+                    key={item.path}
+                    path={item.path}
+                    element={<item.element />} />
+                )) : null}
+              </Route>
             )
           })
         }
