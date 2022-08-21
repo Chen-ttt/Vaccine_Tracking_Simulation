@@ -19,7 +19,7 @@
     "clsx": "^1.1.1",
     "cross-fetch": "^3.1.4",
     "date-fns": "^2.26.0",
-    "echarts": "^5.2.2",
+    "echarts": "^5.3.3",
     "echarts-for-react": "^3.0.2",
     "emailjs-com": "^3.2.0",
     "formik": "^2.2.9",
