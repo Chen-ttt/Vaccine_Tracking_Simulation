@@ -2,17 +2,19 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-13 15:46:03
- * @LastEditTime: 2022-08-19 23:55:39
+ * @LastEditTime: 2022-08-21 23:35:26
  * @LastEditors:  
  */
+import { centresName } from "./config"
+
 var Mock = require('mockjs')
 var centreData = Mock.mock("/centreMock", {
-  "centreInfo|3": [{
+  "centreInfo|6": [{
     // 1. Unique ID
     "ID|+1": 0,
 
     // 2. name
-    "name|+1": ["Welfare Pharmacy", "Stubley Medical Centre", "Page Hall Pharmacy"],
+    "name|+1": centresName,
 
     // 3. address
     "address": function () {

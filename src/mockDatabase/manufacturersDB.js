@@ -2,17 +2,19 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-13 15:46:44
- * @LastEditTime: 2022-08-13 15:46:54
+ * @LastEditTime: 2022-08-21 23:35:39
  * @LastEditors:  
  */
+import { manufacturerName } from "./config"
+
 var Mock = require('mockjs')
 var manufacturerData = Mock.mock("/manufacturerMock", {
-  "manufacturerInfo|3": [{
+  "manufacturerInfo|6": [{
     // 1. Unique ID
     "ID|+1": 1,
 
     // 2. name
-    "name|+1": ["NISSIN Easson Factory", "TOYO Enterprise", "CNC-Takag Formi", "Awea Matech", "Sogotec UVA", "Leadwell Laser", "Palmary Virker", "Little Giant", "Spring Factory", "Hendersons Relish"],
+    "name|+1": manufacturerName,
 
     // 3. address
     "address": function () {

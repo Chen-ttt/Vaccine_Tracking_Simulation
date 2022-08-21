@@ -2,20 +2,14 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-13 16:43:08
- * @LastEditTime: 2022-08-20 00:35:36
+ * @LastEditTime: 2022-08-21 23:57:22
  * @LastEditors:  
  */
 
 import axios from "axios"
 import "../mockDatabase/centresDB"
-
-// const getCentreAction = (data) => {
-//   console.log("entre get Centre action")
-//   return {
-//     type: 'GET_CENTRE',
-//     centreInfo: data
-//   }
-// }
+import "../mockDatabase/manufacturersDB"
+import "../mockDatabase/doctorDB"
 
 const initCentreDB = () => {
   return (dispatch, getState) => {
@@ -25,17 +19,6 @@ const initCentreDB = () => {
         return res.data.centreInfo
       })
       .then(data => {
-        // let timerIDs = []
-        // data.forEach(item => {
-        //   timerIDs.push(
-        //     setInterval(() => {
-        //       // item.initVaccine -= 5
-        //       console.log(item.initVaccine)
-        //       dispatch(consumeAction(item.rateComsumption))
-        //     }, 5000)
-        //   )
-        // })
-
         let timerID = setInterval(() => {
           dispatch(consumeAction())
         }, 5000)
@@ -48,6 +31,44 @@ const initCentreDB = () => {
       })
       .catch((err) => {
         console.log("Fail to mock centre database: ", err)
+      })
+  }
+}
+
+const initManDB = () => {
+  return (dispatch, getState) => {
+    axios.get('/manufacturerMock', { dataType: 'json' })
+      .then(res => {
+        console.log("Success to mock Man database! ")
+        return res.data.manufacturerInfo
+      })
+      .then(data => {
+        dispatch({
+          type: 'GET_MANUFACTURER',
+          manInfo: data
+        })
+      })
+      .catch((err) => {
+        console.log("Fail to mock Man database: ", err)
+      })
+  }
+}
+
+const initDoctorDB = () => {
+  return (dispatch, getState) => {
+    axios.get('/doctorMock', { dataType: 'json' })
+      .then(res => {
+        console.log("Success to mock Doctor database! ")
+        return res.data.doctorInfo
+      })
+      .then(data => {
+        dispatch({
+          type: 'GET_DOCTOR',
+          doctorInfo: data
+        })
+      })
+      .catch((err) => {
+        console.log("Fail to mock Doctor database: ", err)
       })
   }
 }
@@ -67,5 +88,7 @@ const clearAction = () => {
 export {
   initCentreDB,
   clearAction,
-  consumeAction
+  consumeAction,
+  initManDB,
+  initDoctorDB
 }
