@@ -2,7 +2,7 @@
  * @Description: Overview Page for User with Responsive Data
  * @Author: Tong Chen
  * @Date: 2022-07-18 16:37:01
- * @LastEditTime: 2022-08-21 22:54:46
+ * @LastEditTime: 2022-08-22 23:51:07
  * @LastEditors:  
  */
 
@@ -16,8 +16,8 @@ import HomeLineChart from '../../components/HomeLineChart'
 
 export const ContentBox = styled('div')(
   ({ theme }) => ({
-    marginLeft: '15%',
-    marginRight: '15%',
+    marginLeft: '20%',
+    marginRight: '20%',
     marginTop: '30px',
     marginBottom: '30px',
     [theme.breakpoints.down('sm')]: { margin: '16px' },
@@ -47,7 +47,8 @@ const SubTitle = styled('span')(({ theme }) => ({
 }))
 
 const StyledButton = styled(Button)(({ theme }) => ({
-  margin: theme.spacing(1),
+  margin: 'auto',
+  display: 'flex'
 }))
 
 function App () {
@@ -62,7 +63,7 @@ function App () {
             <HomeLineChart height="300px"
               color={[palette.primary.dark, palette.primary.main, palette.primary.light]} />
 
-            <CentreList />
+            <CentreList number={6} />
 
           </Grid>
 
@@ -79,10 +80,13 @@ function App () {
             <BookCard />
           </Grid>
 
+          <Grid item xs={12}>
+            <StyledButton variant="outlined" color="primary">
+              View More
+            </StyledButton>
+          </Grid>
         </Grid>
-        <StyledButton variant="outlined" color="primary">
-          View More
-        </StyledButton>
+
       </ContentBox>
     </Fragment>
   )
