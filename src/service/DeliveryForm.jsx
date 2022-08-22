@@ -20,16 +20,6 @@ const DeliveryForm = ({ centreInfo, delivery }) => {
   console.log('form receive', params.id, centreName)
   const [state, setState] = useState({ date: new Date() })
 
-  // useEffect(() => {
-  //   ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
-  //     if (value !== state.password) return false
-
-  //     return true
-  //   })
-  //   return () => ValidatorForm.removeValidationRule('isPasswordMatch')
-  // }, [state.password])
-
-  // set information into formStore and send email to centre to remind the delivery
   const handleSubmit = (event) => {
     console.log('Form submitted', event.target.value)
     delivery(Number(amount), Number(params.id))

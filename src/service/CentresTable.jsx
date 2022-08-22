@@ -1,7 +1,6 @@
 import {
   Box,
   Card,
-  Icon,
   IconButton,
   styled,
   Table,
@@ -9,12 +8,14 @@ import {
   TableCell,
   TableHead,
   TableRow,
-  useTheme,
 } from '@mui/material'
 import { Paragraph } from '../components/Typography'
 import { connect } from 'react-redux'
 import { clearAction } from '../actions/consumeAction'
 import { useNavigate } from 'react-router-dom'
+import { colorPalette } from '../components/themeConfig'
+import { RemainTag } from '../components/RemainTag'
+import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined'
 
 const CardHeader = styled(Box)(() => ({
   display: 'flex',
@@ -26,8 +27,8 @@ const CardHeader = styled(Box)(() => ({
 }))
 
 const Title = styled('span')(() => ({
-  fontSize: '1rem',
-  fontWeight: '500',
+  fontSize: '1.2rem',
+  fontWeight: '700',
   textTransform: 'capitalize',
 }))
 
@@ -44,24 +45,8 @@ const ProductTable = styled(Table)(() => ({
   '& td:first-of-type': { paddingLeft: '16px !important' },
 }))
 
-const Small = styled('small')(({ bgcolor }) => ({
-  width: 50,
-  height: 15,
-  color: '#fff',
-  padding: '2px 8px',
-  borderRadius: '4px',
-  overflow: 'hidden',
-  background: bgcolor,
-  boxShadow: '0 0 2px 0 rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.24)',
-}))
-
-// const centreList = centreStore.centreList
-
 const CentresTable = ({ centreInfo }) => {
-  const { palette } = useTheme()
-  const bgError = palette.error.main
-  const bgPrimary = palette.primary.main
-  const bgSecondary = palette.secondary.main
+  const { bgRed, bgYellow, bgGreen } = colorPalette
 
   const navigate = useNavigate()
 
@@ -69,14 +54,10 @@ const CentresTable = ({ centreInfo }) => {
     navigate('/service/' + id)
   }
 
-  // function supplyForm(centreName) {
-  //   selectStore.setChoice(centreName)
-  // }
-
   return (
     <Card elevation={3} sx={{ pt: '20px', mb: 3 }}>
       <CardHeader>
-        <Title>top selling products</Title>
+        <Title>Supply Vaccines to Centres</Title>
       </CardHeader>
 
       <Box overflow="auto">
@@ -110,21 +91,20 @@ const CentresTable = ({ centreInfo }) => {
                 <TableCell sx={{ px: 0 }} align="left" colSpan={2}>
                   {centre.initVaccine ? (
                     centre.initVaccine < 30 ? (
-                      <Small bgcolor={bgSecondary}>
+                      <RemainTag bgcolor={bgYellow}>
                         {centre.initVaccine} available
-                      </Small>
+                      </RemainTag>
                     ) : (
-                      <Small bgcolor={bgPrimary}>in stock</Small>
+                      <RemainTag bgcolor={bgGreen}>in stock</RemainTag>
                     )
                   ) : (
-                    <Small bgcolor={bgError}>out of stock</Small>
+                    <RemainTag bgcolor={bgRed}>out of stock</RemainTag>
                   )}
                 </TableCell>
 
                 <TableCell sx={{ px: 0 }} colSpan={1}>
                   <IconButton onClick={() => goToForm(centre.ID)}>
-                    {/* <IconButton> */}
-                    <Icon color="primary">edit</Icon>
+                    <LocalShippingOutlinedIcon></LocalShippingOutlinedIcon>
                   </IconButton>
                 </TableCell>
               </TableRow>
