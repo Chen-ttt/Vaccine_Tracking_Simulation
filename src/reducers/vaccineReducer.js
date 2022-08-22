@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-13 17:11:16
- * @LastEditTime: 2022-08-22 03:37:24
+ * @LastEditTime: 2022-08-23 00:26:25
  * @LastEditors:  
  */
 
@@ -50,12 +50,31 @@ const vaccineReducer = (state = initState(), action) => {
     }
 
     case 'CONSUME_VACCINE': {
-      let temp = state.centreInfo.map(item => ({
-        ...item,
-        initVaccine: item.initVaccine - item.rateComsumption,
-        remainLine: [...item.remainLine, item.initVaccine],
-        rateLine: [...item.rateLine, item.rateComsumption]
-      }))
+      let temp = state.centreInfo.map(item => {
+        if (item.initVaccine === 0) {
+          return {
+            ...item,
+            remainLine: [...item.remainLine, 0],
+            rateLine: [...item.rateLine, 0]
+          }
+        }
+        if (item.initVaccine > item.rateComsumption) {
+          return {
+            ...item,
+            initVaccine: item.initVaccine - item.rateComsumption,
+            remainLine: [...item.remainLine, item.initVaccine],
+            rateLine: [...item.rateLine, item.rateComsumption]
+          }
+        } else {
+          return {
+            ...item,
+            initVaccine: 0,
+            rateComsumption: 0,
+            remainLine: [...item.remainLine, 0],
+            rateLine: [...item.rateLine, 0]
+          }
+        }
+      })
 
       console.log("consume", temp)
 
