@@ -3,16 +3,16 @@ import * as echarts from "echarts"
 let bgColor = "#fff"
 let color = ["#0090FF", "#36CE9E", "#FFC005", "#FF515A", "#8B5CFF", "#00CA69"]
 
-let createData = (remainLine) => {
+let createData = (remainLine, rateLine) => {
   return remainLine.map((item, index) => ({
     name: index,
     value1: item,
-    value2: item + 10
+    value2: rateLine[index]
   }))
 }
 
-let configOptions = (remainLine) => {
-  let echartData = createData(remainLine)
+let configOptions = (remainLine, rateLine) => {
+  let echartData = createData(remainLine, rateLine)
 
   let xAxisData = echartData.map((v) => v.name)
   //  ["1", "2", "3", "4", "5", "6", "7", "8"]
@@ -118,7 +118,7 @@ let configOptions = (remainLine) => {
     ],
     series: [
       {
-        name: "2018",
+        name: "remain vaccine",
         type: "line",
         smooth: true,
         // showSymbol: false,/
@@ -158,7 +158,7 @@ let configOptions = (remainLine) => {
         data: yAxisData1,
       },
       {
-        name: "2019",
+        name: "consumption rate",
         type: "line",
         smooth: true,
         // showSymbol: false,

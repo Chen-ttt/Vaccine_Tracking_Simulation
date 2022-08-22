@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-20 23:53:05
- * @LastEditTime: 2022-08-21 23:07:47
+ * @LastEditTime: 2022-08-22 01:48:52
  * @LastEditors:  
  */
 import * as echarts from "echarts"
@@ -15,7 +15,7 @@ function LineChart (props) {
 
   useEffect(() => {
     let myChart = echarts.init(document.getElementById('lineChartBlank'))
-    let option = configOptions(centres[id].remainLine)
+    let option = configOptions(centres[id].remainLine, centres[id].rateLine)
     option && myChart.setOption(option)
   })
 
@@ -25,7 +25,6 @@ function LineChart (props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log("linechart: state change", state)
   return ({
     centres: state.centreInfo
   })
