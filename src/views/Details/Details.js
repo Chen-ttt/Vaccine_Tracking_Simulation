@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-15 19:36:02
- * @LastEditTime: 2022-08-21 23:32:45
+ * @LastEditTime: 2022-08-22 09:21:31
  * @LastEditors:  
  */
 import LineChart from "../../components/LineChart"
@@ -11,11 +11,12 @@ import { connect } from 'react-redux'
 import { CardRoot, StyledCard } from '../../components/CardStyle'
 import { Card, Grid } from '@mui/material'
 import { InforBox } from "./InforBox"
+import ManBox from "./ManBox"
+import DoctorBox from "./DoctorBox"
 
-function DetailPage ({ centres }) {
+function DetailPage ({ centres, mans, doctors }) {
   const params = useParams()
-
-  console.log("About receive:", params.id, centres)
+  const curCentre = centres[params.id]
 
   return (
     <div>
@@ -29,7 +30,26 @@ function DetailPage ({ centres }) {
       <Grid container spacing={3}>
         <Grid item xs={8}>
           <Card sx={{ px: 3, py: 2, mb: 3 }}>
-            <InforBox centre={centres[params.id]} />
+            <InforBox centre={curCentre} />
+          </Card>
+        </Grid>
+
+        <Grid item xs={4}>
+          <Card sx={{ px: 3, py: 2, mb: 3 }}>
+            News
+            <div id="addBlank"></div>
+          </Card>
+        </Grid>
+
+        <Grid item xs={8}>
+          <Card sx={{ px: 3, py: 2, mb: 3 }}>
+            <ManBox mans={mans} rela={curCentre.manList} />
+          </Card>
+        </Grid>
+
+        <Grid item xs={8}>
+          <Card sx={{ px: 3, py: 2, mb: 3 }}>
+            <DoctorBox doctors={doctors} rela={curCentre.doctorList} />
           </Card>
         </Grid>
       </Grid>
@@ -38,9 +58,10 @@ function DetailPage ({ centres }) {
 }
 
 const mapStateToProps = (state) => {
-  console.log("detail: state change", state)
   return ({
-    centres: state.centreInfo
+    centres: state.centreInfo,
+    mans: state.manInfo,
+    doctors: state.doctorInfo
   })
 }
 
