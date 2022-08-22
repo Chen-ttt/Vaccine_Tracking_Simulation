@@ -2,17 +2,12 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-21 22:59:55
- * @LastEditTime: 2022-08-21 23:33:30
+ * @LastEditTime: 2022-08-22 01:02:32
  * @LastEditors:  
  */
 import { H1, H2, H3, H4 } from "../../components/Typography"
 
 function InforBox ({ centre }) {
-  console.log("enter InforBox", centre)
-  const IconList = [
-    "3d_rotation",
-    "ac_unit",
-    "access_alarm",]
 
   return (
     <div>
