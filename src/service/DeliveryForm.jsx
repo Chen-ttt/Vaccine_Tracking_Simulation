@@ -1,35 +1,41 @@
 import { DatePicker } from '@mui/x-date-pickers'
 import AdapterDateFns from '@mui/lab/AdapterDateFns'
 import LocalizationProvider from '@mui/lab/LocalizationProvider'
-import { Button, Grid, styled } from '@mui/material'
+import { Button, Grid, styled, Card } from '@mui/material'
 import { H3, H4, Span } from '../components/Typography'
 import { useEffect, useState } from 'react'
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
-import { formStore } from '../store/FormStore'
+import { useParams } from 'react-router-dom'
+import { deliveryAction } from '../actions/consumeAction'
+import { connect } from 'react-redux'
 
 const TextField = styled(TextValidator)(() => ({
   width: '100%',
   marginBottom: '16px',
 }))
 
-const DeliveryForm = ({ centreName, formStore, selectStore }) => {
+const DeliveryForm = ({ centreInfo, delivery }) => {
+  const params = useParams()
+  const centreName = centreInfo[params.id].name
+  console.log('form receive', params.id, centreName)
   const [state, setState] = useState({ date: new Date() })
 
-  useEffect(() => {
-    ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
-      if (value !== state.password) return false
+  // useEffect(() => {
+  //   ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
+  //     if (value !== state.password) return false
 
-      return true
-    })
-    return () => ValidatorForm.removeValidationRule('isPasswordMatch')
-  }, [state.password])
+  //     return true
+  //   })
+  //   return () => ValidatorForm.removeValidationRule('isPasswordMatch')
+  // }, [state.password])
 
   // set information into formStore and send email to centre to remind the delivery
   const handleSubmit = (event) => {
-    console.log('Form submitted', event.target)
-    formStore.setForm(centreName, state)
-    formStore.sendEmail(event)
-    selectStore.closeChoice()
+    console.log('Form submitted', event.target.value)
+    delivery(Number(amount), Number(params.id))
+
+    let div = document.getElementById('addBlank')
+    div.append('Manufacturer delivery', amount, 'vaccines...')
   }
 
   const handleChange = (event) => {
@@ -42,7 +48,7 @@ const DeliveryForm = ({ centreName, formStore, selectStore }) => {
   const { amount, driver, date, code } = state
 
   return (
-    <div>
+    <Card sx={{ px: 3, py: 2, mb: 1 }}>
       <ValidatorForm onSubmit={handleSubmit} onError={() => null}>
         <H3>Delivery Form</H3>
         <Grid container spacing={6}>
@@ -99,11 +105,23 @@ const DeliveryForm = ({ centreName, formStore, selectStore }) => {
 
         <Button color="primary" variant="contained" type="submit">
           {/* <Icon>send</Icon> */}
-          <Span sx={{ pl: 1, textTransform: 'capitalize' }}>Submit</Span>
+          <Span sx={{ pl: 0, textTransform: 'capitalize' }}>Submit</Span>
         </Button>
       </ValidatorForm>
-    </div>
+    </Card>
   )
 }
 
-export default DeliveryForm
+const mapStateToProps = (state) => {
+  return {
+    centreInfo: state.centreInfo,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    delivery: (amount, id) => dispatch(deliveryAction(amount, id)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeliveryForm)

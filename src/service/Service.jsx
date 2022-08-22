@@ -2,7 +2,7 @@
  * @Description: Main page of service which includes Centre Table and Delivery Form
  * @Author: Tong Chen
  * @Date: 2022-07-18 21:42:35
- * @LastEditTime: 2022-08-15 19:40:45
+ * @LastEditTime: 2022-08-22 03:26:32
  * @LastEditors:
  */
 
@@ -10,41 +10,29 @@ import CentresTable from './CentresTable'
 import DeliveryForm from './DeliveryForm'
 import SimpleCard from '../components/SimpleCard'
 import { Fragment } from 'react'
-import { ContentBox } from '../views/App'
+import { ContentBox } from '../views/HomePage/App'
 import { Stack, Grid } from '@mui/material'
-import { observer } from 'mobx-react-lite'
-
-import { selectStore } from '../store/SelectStore'
-import { formStore } from '../store/FormStore'
+import { centreStore } from '../store/centreStore'
+import { Provider } from 'react-redux'
+import { Outlet } from 'react-router-dom'
 
 function Service() {
-  console.log(selectStore.choice.appear)
-  console.log(formStore.form)
-
   return (
-    <Fragment>
-      <ContentBox>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={8}>
-            <CentresTable selectStore={selectStore} />
+    <Provider store={centreStore}>
+      <Fragment>
+        <ContentBox>
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={8}>
+              <CentresTable />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Outlet />
+            </Grid>
           </Grid>
-          <Grid item xs={12} md={4}>
-            {selectStore.choice.appear ? (
-              <Stack spacing={3}>
-                <SimpleCard>
-                  <DeliveryForm
-                    centreName={selectStore.choice.centre}
-                    formStore={formStore}
-                    selectStore={selectStore}
-                  />
-                </SimpleCard>
-              </Stack>
-            ) : null}
-          </Grid>
-        </Grid>
-      </ContentBox>
-    </Fragment>
+        </ContentBox>
+      </Fragment>
+    </Provider>
   )
 }
 
-export default observer(Service)
+export default Service
