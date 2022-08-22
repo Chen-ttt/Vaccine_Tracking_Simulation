@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-13 15:46:03
- * @LastEditTime: 2022-08-22 09:25:42
+ * @LastEditTime: 2022-08-23 00:27:12
  * @LastEditors:  
  */
 import { centresName } from "./config"
@@ -61,7 +61,7 @@ var centreData = Mock.mock("/centreMock", {
 
     // 12.
     "rateComsumption": function () {
-      return Math.floor(this.centreLevel + this.population * 0.01)
+      return Math.floor(this.centreLevel + this.population * 0.01) * 2
     },
 
     // 13.
