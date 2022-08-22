@@ -2,26 +2,19 @@
  * @Description: Render A List of Centre Cards with Responsive Data
  * @Author: Tong Chen
  * @Date: 2022-07-18 18:00:33
- * @LastEditTime: 2022-08-21 23:21:41
+ * @LastEditTime: 2022-08-23 00:02:18
  * @LastEditors:  
  */
 
 import { Box, styled, Grid, Card, Button, IconButton, Tooltip, Icon } from '@mui/material'
-import { Small, H6, Paragraph } from '../../components/Typography'
+import { Small, H3, H6 } from '../../components/Typography'
 import { connect } from 'react-redux'
 import { clearAction } from '../../actions/consumeAction'
 import { useNavigate } from "react-router-dom"
-
-// const StyledCard = styled(Card)(({ theme }) => ({
-//   height: '110px',
-//   display: 'flex',
-//   flexWrap: 'wrap',
-//   alignItems: 'center',
-//   justifyContent: 'space-between',
-//   padding: '20px !important',
-//   background: theme.palette.background.paper,
-//   [theme.breakpoints.down('sm')]: { padding: '16px !important' },
-// }))
+import { RemainTag } from "../../components/RemainTag"
+import { colorPalette } from "../../components/themeConfig"
+// import DeleteIcon from '@mui/icons-material/Delete'
+import ArrowRightAltOutlinedIcon from '@mui/icons-material/ArrowRightAltOutlined'
 
 const StyledCard = styled(Card)(({ theme }) => ({
   display: 'flex',
@@ -51,37 +44,60 @@ const Heading = styled('h6')(({ theme }) => ({
 
 function CenterCard (props) {
   console.log("props", props)
-  const { state, clearTimer } = props
-  const centreInfo = state.centreInfo
-
+  const { number, state, clearTimer } = props
+  const centreInfo = number ? state.centreInfo.slice(0, number) : state.centreInfo
+  const numCol = number === 6 ? 6 : 4
   const navigate = useNavigate()
 
   const goToDetails = (id) => {
     navigate('/details/' + id)
   }
 
+  const { bgRed, bgYellow, bgGreen } = colorPalette
+
   return (
     <>
-      <Grid container spacing={3} sx={{ mb: '10px' }}>
+      <Grid container spacing={3}>
         {centreInfo ? centreInfo.map((item, index) => (
-          <Grid item xs={12} md={6} key={index}>
-            <Card sx={{ px: 3, py: 2, mb: 1 }}>
+          <Grid item xs={12} md={numCol} key={index}>
+            <Card sx={{ px: 3, py: 2, mb: 0 }}>
               <Grid container spacing={3}>
-                <Grid item xs={8}>
+                <Grid item xs={9}>
                   <Box>
-                    <H6>{item.name}</H6>
+                    <H3>{item.name}</H3>
                     <Small>{item.openTime}</Small>
                     <br></br>
-                    <Heading>{item.initVaccine} available</Heading>
-                    <Paragraph>{item.distance} miles away</Paragraph>
+                    {item.initVaccine ? (
+                      item.initVaccine < 30 ? (
+                        <RemainTag bgcolor={bgYellow}>
+                          {item.initVaccine} available
+                        </RemainTag>
+                      ) : (
+                        <RemainTag bgcolor={bgGreen}>in stock</RemainTag>
+                      )
+                    ) : (
+                      <RemainTag bgcolor={bgRed}>out of stock</RemainTag>
+                    )}
+                    <br></br>
+                    <br></br>
+                    <Grid container spacing={0}>
+                      <Grid item>
+                        <img src="/icon/distance.png" alt="404" height={18} />
+                      </Grid>
+                      <Grid item>
+                        <H6>{item.distance} miles away</H6>
+                      </Grid>
+                    </Grid>
                   </Box>
                 </Grid>
 
-                <Grid item xs={4}>
+                <Grid item xs={3}>
+                  <br></br>
                   <Tooltip title="View Details" placement="top">
                     <IconButton onClick={() => goToDetails(item.ID)}>
-                      {/* <Icon>"arrow_right_alt"</Icon> */}
-                      <img src="/icon/arrowIcon.png" alt="404" height={30} />
+                      {/* <Icon>"arrow_right_alt"</Icon>
+                      <img src="/icon/arrow.png" alt="404" height={40} /> */}
+                      <ArrowRightAltOutlinedIcon sx={{ fontSize: 35 }}></ArrowRightAltOutlinedIcon>
                     </IconButton>
                   </Tooltip>
                 </Grid>
@@ -108,7 +124,6 @@ function CenterCard (props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log("state change", state)
   return ({
     state: state
   })
