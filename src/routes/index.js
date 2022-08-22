@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-02 00:30:20
- * @LastEditTime: 2022-08-21 18:58:14
+ * @LastEditTime: 2022-08-22 03:10:08
  * @LastEditors:  
  */
 
@@ -23,12 +23,30 @@ function Router () {
                 path={path}
                 element={<Element />}
               >
-                {subRoutes ? subRoutes.map(item => (
-                  <Route
-                    key={item.path}
-                    path={item.path}
-                    element={<item.element />} />
-                )) : null}
+                {subRoutes ? subRoutes.map(item => {
+                  if (item.thirdRoutes) {
+                    return (
+                      <Route
+                        key={item.path}
+                        path={item.path}
+                        element={< item.element />}>
+                        {item.thirdRoutes.map(third => (
+                          <Route
+                            key={third.path}
+                            path={third.path}
+                            element={< third.element />} />
+                        ))}
+                      </Route>
+                    )
+                  } else {
+                    return (
+                      <Route
+                        key={item.path}
+                        path={item.path}
+                        element={< item.element />} />
+                    )
+                  }
+                }) : null}
               </Route>
             )
           })
