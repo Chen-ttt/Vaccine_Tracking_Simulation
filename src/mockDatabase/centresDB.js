@@ -2,14 +2,14 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-13 15:46:03
- * @LastEditTime: 2022-08-21 23:35:26
+ * @LastEditTime: 2022-08-22 09:25:42
  * @LastEditors:  
  */
 import { centresName } from "./config"
 
 var Mock = require('mockjs')
 var centreData = Mock.mock("/centreMock", {
-  "centreInfo|6": [{
+  "centreInfo|24": [{
     // 1. Unique ID
     "ID|+1": 0,
 
@@ -42,11 +42,11 @@ var centreData = Mock.mock("/centreMock", {
 
     // 9. population
     "population": function () {
-      if (this.areaLevel === 1) return Mock.Random.integer(20, 100)
-      else if (this.areaLevel === 2) return Mock.Random.integer(101, 300)
-      else if (this.areaLevel === 3) return Mock.Random.integer(301, 600)
-      else if (this.areaLevel === 4) return Mock.Random.integer(601, 1000)
-      else if (this.areaLevel === 5) return Mock.Random.integer(1001, 1500)
+      if (this.centreLevel === 1) return Mock.Random.integer(20, 100)
+      else if (this.centreLevel === 2) return Mock.Random.integer(101, 300)
+      else if (this.centreLevel === 3) return Mock.Random.integer(301, 600)
+      else if (this.centreLevel === 4) return Mock.Random.integer(601, 1000)
+      else if (this.centreLevel === 5) return Mock.Random.integer(1001, 1500)
     },
 
     // 10. max storage
@@ -55,9 +55,25 @@ var centreData = Mock.mock("/centreMock", {
     },
 
     // 11. initial number of vaccines
-    "initVaccine|40-600": 1,
+    "initVaccine": function () {
+      return this.maxStorage
+    },
 
-    "rateComsumption": 10
+    // 12.
+    "rateComsumption": function () {
+      return Math.floor(this.centreLevel + this.population * 0.01)
+    },
+
+    // 13.
+    "manList": function () {
+      return [this.ID * 2, this.ID * 2 + 1]
+    },
+
+    // 14. 
+    "doctorList": function () {
+      const c = this.ID * 6
+      return [c, c + 1, c + 2, c + 3, c + 4, c + 5]
+    }
   }]
 })
 

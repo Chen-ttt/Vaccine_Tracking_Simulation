@@ -2,14 +2,13 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-13 15:46:44
- * @LastEditTime: 2022-08-21 23:53:33
+ * @LastEditTime: 2022-08-22 09:26:26
  * @LastEditors:  
  */
-// import { manufacturerName } from "./config"
 
 var Mock = require('mockjs')
 var doctorData = Mock.mock("/doctorMock", {
-  "doctorInfo|6": [{
+  "doctorInfo|144": [{
     // 1. Unique ID
     "ID|+1": 1,
 
