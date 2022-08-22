@@ -2,7 +2,7 @@
  * @Description: Route config
  * @Author: Tong Chen
  * @Date: 2022-08-02 00:30:29
- * @LastEditTime: 2022-08-21 21:04:14
+ * @LastEditTime: 2022-08-22 04:19:09
  * @LastEditors:  
  */
 
@@ -11,7 +11,9 @@ import Root from "../views/Details/Root"
 import HomeRoot from "../views/HomeRoot"
 import { MenuButton } from "../views/MenuButton"
 import HomeLineChart from "../components/HomeLineChart"
-// import Service from "../service/Service"
+import Service from "../service/Service"
+import DeliveryForm from "../service/DeliveryForm"
+import CentrePage from "../views/CentreList/CentrePage"
 
 export default [
   {
@@ -25,11 +27,17 @@ export default [
       },
       {
         path: '/centres',
-        element: MenuButton
+        element: CentrePage
       },
       {
         path: '/service',
-        element: MenuButton
+        element: Service,
+        thirdRoutes: [
+          {
+            path: '/service/:id',
+            element: DeliveryForm
+          }
+        ]
       },
       {
         path: '/details/:id',
