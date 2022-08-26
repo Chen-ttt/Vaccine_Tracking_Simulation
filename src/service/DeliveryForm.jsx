@@ -8,6 +8,8 @@ import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
 import { useParams } from 'react-router-dom'
 import { deliveryAction } from '../actions/consumeAction'
 import { connect } from 'react-redux'
+import emailjs from 'emailjs-com'
+// import { centreStore } from '../store/centreStore'
 
 const TextField = styled(TextValidator)(() => ({
   width: '100%',
@@ -16,16 +18,31 @@ const TextField = styled(TextValidator)(() => ({
 
 const DeliveryForm = ({ centreInfo, delivery }) => {
   const params = useParams()
-  const centreName = centreInfo[params.id].name
-  console.log('form receive', params.id, centreName)
   const [state, setState] = useState({ date: new Date() })
 
-  const handleSubmit = (event) => {
-    console.log('Form submitted', event.target.value)
-    delivery(Number(amount), Number(params.id))
+  // centreInfo = centreStore.getState().centreInfo
+  const centreName = centreInfo[params.id].name
+  console.log('form receive', params.id, centreName)
 
-    let div = document.getElementById('addBlank')
-    div.append('Manufacturer delivery', amount, 'vaccines...')
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    console.log('Form submitted', event.target)
+
+    // emailjs
+    //   .sendForm('gmail', 'template_utnmhlb', event.target, 'Ah0EiXaVqDkRWJm24')
+    //   .then(
+    //     (result) => {
+    //       console.log('Delivery Remind email send!')
+    //     },
+    //     (error) => {
+    //       console.log(error.text)
+    //     }
+    //   )
+    console.log('skip email')
+    // delivery(Number(amount), Number(params.id))
+
+    // let div = document.getElementById('addBlank')
+    // div.append('Manufacturer delivery', amount, 'vaccines...')
   }
 
   const handleChange = (event) => {
