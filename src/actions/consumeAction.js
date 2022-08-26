@@ -2,18 +2,16 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-13 16:43:08
- * @LastEditTime: 2022-08-22 09:22:24
+ * @LastEditTime: 2022-08-25 22:38:19
  * @LastEditors:  
  */
 
 import axios from "axios"
-import "../mockDatabase/centresDB"
-import "../mockDatabase/manufacturersDB"
-import "../mockDatabase/doctorDB"
+const pathPrefix = "http://localhost:3003"
 
 const initCentreDB = () => {
   return (dispatch, getState) => {
-    axios.get('/centreMock', { dataType: 'json' })
+    axios.get(pathPrefix + '/mockCentre.action', { dataType: 'json' })
       .then(res => {
         console.log("Success to mock centre database! ")
         return res.data.centreInfo
@@ -37,7 +35,7 @@ const initCentreDB = () => {
 
 const initManDB = () => {
   return (dispatch, getState) => {
-    axios.get('/manufacturerMock', { dataType: 'json' })
+    axios.get(pathPrefix + '/mockMan.action', { dataType: 'json' })
       .then(res => {
         console.log("Success to mock Man database! ")
         return res.data.manufacturerInfo
@@ -56,7 +54,7 @@ const initManDB = () => {
 
 const initDoctorDB = () => {
   return (dispatch, getState) => {
-    axios.get('/doctorMock', { dataType: 'json' })
+    axios.get(pathPrefix + '/mockDoctor.action', { dataType: 'json' })
       .then(res => {
         console.log("Success to mock Doctor database! ")
         return res.data.doctorInfo
