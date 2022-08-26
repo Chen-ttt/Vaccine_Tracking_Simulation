@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-13 17:11:16
- * @LastEditTime: 2022-08-23 00:26:25
+ * @LastEditTime: 2022-08-25 23:29:38
  * @LastEditors:  
  */
 
@@ -20,6 +20,8 @@ const vaccineReducer = (state = initState(), action) => {
       action.centreInfo.forEach(item => {
         item.remainLine = [item.initVaccine]
         item.rateLine = [item.rateComsumption]
+        item.isRequesting = false // true means this centre has sent an request email
+        item.isDeliverying = false // true means there are some vaccines delivery to this centre
       })
 
       return {
@@ -102,6 +104,34 @@ const vaccineReducer = (state = initState(), action) => {
         ...state,
         centreInfo: temp
       }
+    }
+
+    case 'SEND_REQUEST': {
+      console.log("enter send request reducer")
+      // let temp = state.centreInfo.map(item => {
+      //   console.log("idList", action.idList, "item.id", item.ID, "match?", action.idList.includes(item.ID))
+      //   if (action.idList.includes(item.ID)) {
+      //     console.log("send! centre id", item.ID)
+      //     return {
+      //       ...item,
+      //       isRequesting: true
+      //     }
+      //   } else return item
+      // })
+
+      state.centreInfo.forEach(item => {
+        console.log("idList", action.idList, "item.id", item.ID, "match?", action.idList.includes(item.ID))
+        if (action.idList.includes(item.ID)) {
+          console.log("send! centre id", item.ID)
+          item.isRequesting = true
+        }
+      })
+
+      return state
+      // return {
+      //   ...state,
+      //   centreInfo: temp
+      // }
     }
 
     default: {
