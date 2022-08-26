@@ -2,18 +2,22 @@
  * @Description: Render A List of Centre Cards with Responsive Data
  * @Author: Tong Chen
  * @Date: 2022-07-18 18:00:33
- * @LastEditTime: 2022-08-23 00:02:18
+ * @LastEditTime: 2022-08-26 01:53:26
  * @LastEditors:  
  */
 
+import React from 'react'
+import { useEffect, useRef } from "react"
+import { createRoot } from 'react-dom/client'
 import { Box, styled, Grid, Card, Button, IconButton, Tooltip, Icon } from '@mui/material'
 import { Small, H3, H6 } from '../../components/Typography'
+import CustomizedSnackbars from '../../components/MessageBar'
 import { connect } from 'react-redux'
 import { clearAction } from '../../actions/consumeAction'
+import { requestAction } from '../../actions/emailAction'
 import { useNavigate } from "react-router-dom"
 import { RemainTag } from "../../components/RemainTag"
 import { colorPalette } from "../../components/themeConfig"
-// import DeleteIcon from '@mui/icons-material/Delete'
 import ArrowRightAltOutlinedIcon from '@mui/icons-material/ArrowRightAltOutlined'
 
 const StyledCard = styled(Card)(({ theme }) => ({
@@ -43,12 +47,41 @@ const Heading = styled('h6')(({ theme }) => ({
 }))
 
 function CenterCard (props) {
-  console.log("props", props)
-  const { number, state, clearTimer } = props
-  const centreInfo = number ? state.centreInfo.slice(0, number) : state.centreInfo
-  const numCol = number === 6 ? 6 : 4
-  const navigate = useNavigate()
+  console.log("from card props", props)
+  const { number, allCentres, clearTimer, checkLess } = props
 
+  const [msgBar, setMsgBar] = React.useState(null)
+  const [divCom, setDivCom] = React.useState(null)
+
+  // use ref to append DOM node
+  const msgDivRef = useRef(null)
+
+  // firstly, check if centres need to send request emails to manufacturers
+  // it will be called every time the state is changed
+  const resultOfEmail = checkLess()
+  if (resultOfEmail) {
+    setMsgBar(resultOfEmail)
+    console.log("checkLess return ", resultOfEmail, msgBar)
+  }
+
+  useEffect(() => {
+    if (msgBar === null) {
+      setDivCom(createRoot(msgDivRef.current)) // initail the div component
+    }
+
+    // if there are several centres in emergency, just show one message bar
+    if (msgBar && divCom) {
+      divCom.render(<CustomizedSnackbars centreName={allCentres[msgBar[0]].name} />)
+    }
+  }, [msgBar])
+
+  // number means which page is asking CentreCards, Home page or Centre page
+  // if Home page, just show 6 cards
+  const centreInfo = number ? allCentres.slice(0, number) : allCentres
+  const numCol = number === 6 ? 6 : 4
+
+  // use Navigate to jump to Detail page
+  const navigate = useNavigate()
   const goToDetails = (id) => {
     navigate('/details/' + id)
   }
@@ -57,6 +90,7 @@ function CenterCard (props) {
 
   return (
     <>
+      <div id='msgBarDiv' ref={msgDivRef}></div>
       <Grid container spacing={3}>
         {centreInfo ? centreInfo.map((item, index) => (
           <Grid item xs={12} md={numCol} key={index}>
@@ -125,15 +159,14 @@ function CenterCard (props) {
 
 const mapStateToProps = (state) => {
   return ({
-    state: state
+    allCentres: state.centreInfo
   })
 }
 
 const mapDispatchToProps = (dispatch) => {
   return ({
-    // get: () => dispatch(initCentreDB()),
     clearTimer: () => dispatch(clearAction()),
-    // show: () => console.log(centreStore.getState())
+    checkLess: () => dispatch(requestAction())
   })
 }
 
