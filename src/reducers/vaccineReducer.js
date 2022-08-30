@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-13 17:11:16
- * @LastEditTime: 2022-08-30 18:58:57
+ * @LastEditTime: 2022-08-30 20:35:09
  * @LastEditors:  
  */
 
@@ -59,7 +59,22 @@ const vaccineReducer = (state = initState(), action) => {
     }
 
     case 'CONSUME_VACCINE': {
+      if (state.globalTimer.hour === 24) {
+        state.globalTimer.day++
+        state.globalTimer.hour = 0
+      } else state.globalTimer.hour++
+
+      const hour = state.globalTimer.hour
+
       let temp = state.centreInfo.map(item => {
+        if (hour < 9 || hour > 19) item.rateComsumption = 0
+        else if ((hour >= 9 && hour <= 12) || (hour > 14 && hour <= 17)) {
+          item.rateComsumption = Math.floor(item.centreLevel + item.population * 0.01 + item.initVaccine * 0.02)
+        }
+        else if ((hour > 12 && hour <= 14) || (hour > 17 && hour <= 19)) {
+          item.rateComsumption = Math.floor(item.centreLevel + item.population * 0.01 + item.initVaccine * 0.05)
+        }
+
         if (item.initVaccine === 0) {
           return {
             ...item,
@@ -84,13 +99,6 @@ const vaccineReducer = (state = initState(), action) => {
           }
         }
       })
-
-      console.log("consume", temp)
-
-      if (state.globalTimer.hour === 24) {
-        state.globalTimer.day++
-        state.globalTimer.hour = 0
-      } else state.globalTimer.hour++
 
       return {
         ...state,
