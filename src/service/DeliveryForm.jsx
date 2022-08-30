@@ -43,7 +43,7 @@ const DeliveryForm = ({ centreInfo, delivery, supplied }) => {
 
     setTimeout(() => {
       supplied(Number(amount), Number(params.id), 0)
-    }, 5000)
+    }, 8000)
 
     // let div = document.getElementById('addBlank')
     // div.append('Manufacturer delivery', amount, 'vaccines...')
@@ -131,8 +131,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    delivery: (amount, id) => dispatch(deliveryAction(amount, id)),
-    supplied: (id, manId) => dispatch(suppliedAction(id, manId)),
+    delivery: (amount, centreId, manId) =>
+      dispatch(deliveryAction(amount, centreId, manId)),
+    supplied: (amount, centreId, manId) =>
+      dispatch(suppliedAction(amount, centreId, manId)),
   }
 }
 

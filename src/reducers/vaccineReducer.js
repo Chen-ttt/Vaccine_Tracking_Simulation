@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-13 17:11:16
- * @LastEditTime: 2022-08-30 20:35:09
+ * @LastEditTime: 2022-08-30 22:29:23
  * @LastEditors:  
  */
 
@@ -110,13 +110,18 @@ const vaccineReducer = (state = initState(), action) => {
     }
 
     case 'DELIVERY_VACCINE': {
+      console.log("enter delivery", action.man, typeof (action.man))
       let temp = state.centreInfo.map((item, index) => {
         if (index === action.id) {
           return {
             ...item,
-            // initVaccine: item.initVaccine += action.amount,
             isDeliverying: true,
-            deliveryInfo: [...item.deliveryInfo, { man: action.man, amount: action.amount }]
+            deliveryInfo: [...item.deliveryInfo, {
+              man: state.manInfo[action.man].name,
+              amount: action.amount,
+              bool: false,
+              time: state.globalTimer.day + " " + state.globalTimer.month + " " + state.globalTimer.hour + "am"
+            }]
           }
         } else return item
       })
@@ -165,7 +170,12 @@ const vaccineReducer = (state = initState(), action) => {
             ...item,
             initVaccine: item.initVaccine += action.amount,
             isDeliverying: false,
-            deliveryInfo: [...item.deliveryInfo, { man: action.man, amount: action.amount }]
+            deliveryInfo: [...item.deliveryInfo, {
+              man: state.manInfo[action.man].name,
+              amount: action.amount,
+              bool: true,
+              time: state.globalTimer.day + " " + state.globalTimer.month + " " + state.globalTimer.hour + "am"
+            }]
           }
         } else return item
       })
