@@ -2,7 +2,7 @@
  * @Description: Overview Page for User with Responsive Data
  * @Author: Tong Chen
  * @Date: 2022-07-18 16:37:01
- * @LastEditTime: 2022-08-22 23:51:07
+ * @LastEditTime: 2022-08-30 18:09:03
  * @LastEditors:  
  */
 
@@ -16,8 +16,8 @@ import HomeLineChart from '../../components/HomeLineChart'
 
 export const ContentBox = styled('div')(
   ({ theme }) => ({
-    marginLeft: '20%',
-    marginRight: '20%',
+    marginLeft: '20vw',
+    marginRight: '20vw',
     marginTop: '30px',
     marginBottom: '30px',
     [theme.breakpoints.down('sm')]: { margin: '16px' },

@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-15 19:36:02
- * @LastEditTime: 2022-08-22 09:21:31
+ * @LastEditTime: 2022-08-30 17:36:35
  * @LastEditors:  
  */
 import LineChart from "../../components/LineChart"
@@ -17,6 +17,7 @@ import DoctorBox from "./DoctorBox"
 function DetailPage ({ centres, mans, doctors }) {
   const params = useParams()
   const curCentre = centres[params.id]
+  const deliveryInfo = curCentre.deliveryInfo
 
   return (
     <div>
@@ -37,6 +38,9 @@ function DetailPage ({ centres, mans, doctors }) {
         <Grid item xs={4}>
           <Card sx={{ px: 3, py: 2, mb: 3 }}>
             News
+            {deliveryInfo.length !== 0 ? deliveryInfo.map((item, index) => (
+              <div key={index}>{item.man}{item.amount}</div>
+            )) : null}
             <div id="addBlank"></div>
           </Card>
         </Grid>
@@ -53,7 +57,7 @@ function DetailPage ({ centres, mans, doctors }) {
           </Card>
         </Grid>
       </Grid>
-    </div>
+    </div >
   )
 }
 
