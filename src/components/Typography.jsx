@@ -26,7 +26,7 @@ export const H1 = ({
       fontSize="28px"
       fontWeight="500"
       lineHeight="1.5"
-      color={'#ffffff'}
+      // color={'#ffffff'}
       {...props}>
       {children}
     </StyledBox>
