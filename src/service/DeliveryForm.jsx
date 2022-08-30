@@ -6,7 +6,7 @@ import { H3, H4, Span } from '../components/Typography'
 import { useEffect, useState } from 'react'
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
 import { useParams } from 'react-router-dom'
-import { deliveryAction } from '../actions/consumeAction'
+import { deliveryAction, suppliedAction } from '../actions/consumeAction'
 import { connect } from 'react-redux'
 import emailjs from 'emailjs-com'
 // import { centreStore } from '../store/centreStore'
@@ -16,7 +16,7 @@ const TextField = styled(TextValidator)(() => ({
   marginBottom: '16px',
 }))
 
-const DeliveryForm = ({ centreInfo, delivery }) => {
+const DeliveryForm = ({ centreInfo, delivery, supplied }) => {
   const params = useParams()
   const [state, setState] = useState({ date: new Date() })
 
@@ -39,7 +39,11 @@ const DeliveryForm = ({ centreInfo, delivery }) => {
     //     }
     //   )
     console.log('skip email')
-    // delivery(Number(amount), Number(params.id))
+    delivery(Number(amount), Number(params.id), 0)
+
+    setTimeout(() => {
+      supplied(Number(amount), Number(params.id), 0)
+    }, 5000)
 
     // let div = document.getElementById('addBlank')
     // div.append('Manufacturer delivery', amount, 'vaccines...')
@@ -128,6 +132,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     delivery: (amount, id) => dispatch(deliveryAction(amount, id)),
+    supplied: (id, manId) => dispatch(suppliedAction(id, manId)),
   }
 }
 

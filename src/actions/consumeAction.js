@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-13 16:43:08
- * @LastEditTime: 2022-08-25 22:38:19
+ * @LastEditTime: 2022-08-30 18:59:00
  * @LastEditors:  
  */
 
@@ -89,11 +89,21 @@ const clearAction = () => {
   }
 }
 
-const deliveryAction = (amount, centreId) => {
+const deliveryAction = (amount, centreId, manId) => {
   return {
     type: "DELIVERY_VACCINE",
     amount: amount,
-    id: centreId
+    id: centreId,
+    man: manId
+  }
+}
+
+const suppliedAction = (amount, centreId, manId) => {
+  return {
+    type: "DELIVERY_SENDED",
+    amount: amount,
+    id: centreId,
+    man: manId
   }
 }
 
@@ -104,5 +114,6 @@ export {
   initManDB,
   initDoctorDB,
   affactRateAction,
-  deliveryAction
+  deliveryAction,
+  suppliedAction
 }
