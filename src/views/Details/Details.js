@@ -2,14 +2,14 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-15 19:36:02
- * @LastEditTime: 2022-08-30 22:43:50
+ * @LastEditTime: 2022-08-31 12:35:39
  * @LastEditors:  
  */
 import LineChart from "../../components/LineChart"
 import { useParams } from "react-router-dom"
 import { connect } from 'react-redux'
-import { CardRoot, StyledCard } from '../../components/CardStyle'
-import { Card, Grid, LinearProgress, CircularProgress, Icon } from '@mui/material'
+// import { CardRoot, StyledCard } from '../../components/CardStyle'
+import { Card, Grid } from '@mui/material'
 import { InforBox } from "./InforBox"
 import ManBox from "./ManBox"
 import DoctorBox from "./DoctorBox"
@@ -18,6 +18,8 @@ import NewsBox from "./NewsBox"
 function DetailPage ({ centres, mans, doctors }) {
   const params = useParams()
   const curCentre = centres[params.id]
+
+  console.log("enter detail", mans)
 
   return (
     <div>

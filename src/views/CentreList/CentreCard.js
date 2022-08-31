@@ -2,7 +2,7 @@
  * @Description: Render A List of Centre Cards with Responsive Data
  * @Author: Tong Chen
  * @Date: 2022-07-18 18:00:33
- * @LastEditTime: 2022-08-26 01:53:26
+ * @LastEditTime: 2022-08-31 13:55:28
  * @LastEditors:  
  */
 
@@ -71,7 +71,9 @@ function CenterCard (props) {
 
     // if there are several centres in emergency, just show one message bar
     if (msgBar && divCom) {
-      divCom.render(<CustomizedSnackbars centreName={allCentres[msgBar[0]].name} />)
+      divCom.render(<CustomizedSnackbars
+        state={"warning"}
+        message={allCentres[msgBar[0]].name + " is in a stock emergency!"} />)
     }
   }, [msgBar])
 

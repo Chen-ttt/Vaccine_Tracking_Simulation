@@ -9,6 +9,10 @@ import * as Yup from 'yup'
 import Background from '../../meeting.png'
 import { AuthContext } from '../HomeRoot'
 import React from 'react'
+import { useEffect, useRef } from 'react'
+import { createRoot } from 'react-dom/client'
+import { centreStore } from '../../store/centreStore'
+import CustomizedSnackbars from '../../components/MessageBar'
 
 const FlexBox = styled(Box)(() => ({ display: 'flex', alignItems: 'center' }))
 
@@ -46,7 +50,7 @@ const JWTRoot = styled(JustifyBox)(() => ({
 
 // inital login credentials
 const initialValues = {
-  email: 'jason@ui-lib.com',
+  username: 's35wz',
   password: 'dummyPass',
   remember: true,
 }
@@ -56,30 +60,58 @@ const validationSchema = Yup.object().shape({
   password: Yup.string()
     .min(6, 'Password must be 6 character length')
     .required('Password is required!'),
-  email: Yup.string()
-    .email('Invalid Email address')
-    .required('Email is required!'),
+  // email: Yup.string()
+  //   .email('Invalid Email address')
+  //   .required('Email is required!'),
 })
 
 const ServiceLogin = () => {
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
   const userAuth = React.useContext(AuthContext)
+  const [isMsg, setIsMsg] = useState(false)
+  const [msgDom, setMsgDom] = useState(null)
+  const msgDivRef = useRef(null)
 
-  let login = (email, passord) => {
-    return true
+  useEffect(() => {
+    if (msgDom === null) {
+      setMsgDom(createRoot(msgDivRef.current))
+    }
+
+    if (msgDom && isMsg) {
+      msgDom.render(
+        <CustomizedSnackbars
+          state={'error'}
+          message={'Login Failed. Plz Try Again.'}
+        />
+      )
+      setIsMsg(false)
+      setLoading(false)
+    }
+  }, [isMsg])
+
+  // Check username and password
+  const { manInfo } = centreStore.getState()
+  let login = (username, password) => {
+    return manInfo.some((item) => {
+      return item.username === username && item.password === password
+    })
   }
 
+  // Login Success and Fail
   const handleFormSubmit = (values) => {
     setLoading(true)
     try {
-      if (login(values.email, values.password)) {
+      if (login(values.username, values.password)) {
         userAuth.isLogin = true
         userAuth.user = {
-          email: values.email,
+          username: values.username,
           passord: values.passord,
         }
         navigate('/service')
+      } else {
+        console.log('login fail')
+        setIsMsg(true)
       }
     } catch (e) {
       setLoading(false)
@@ -88,6 +120,7 @@ const ServiceLogin = () => {
 
   return (
     <BackgroundBox>
+      <div ref={msgDivRef}></div>
       <JWTRoot>
         <Card className="card">
           <Grid container>
@@ -119,15 +152,15 @@ const ServiceLogin = () => {
                       <TextField
                         fullWidth
                         size="small"
-                        type="email"
-                        name="email"
-                        label="Email"
+                        type="string"
+                        name="username"
+                        label="Username"
                         variant="outlined"
                         onBlur={handleBlur}
-                        value={values.email}
+                        value={values.username}
                         onChange={handleChange}
-                        helperText={touched.email && errors.email}
-                        error={Boolean(errors.email && touched.email)}
+                        // helperText={touched.email && errors.email}
+                        // error={Boolean(errors.email && touched.email)}
                         sx={{ mb: 3 }}
                       />
 
@@ -159,9 +192,9 @@ const ServiceLogin = () => {
                           <Paragraph>Remember Me</Paragraph>
                         </FlexBox>
 
-                        <NavLink to="/" style={{ color: '#0288d1' }}>
+                        {/* <NavLink to="/" style={{ color: '#0288d1' }}>
                           Forgot password?
-                        </NavLink>
+                        </NavLink> */}
                       </FlexBox>
 
                       <LoadingButton
@@ -173,7 +206,7 @@ const ServiceLogin = () => {
                         Login
                       </LoadingButton>
 
-                      <Paragraph>
+                      {/* <Paragraph>
                         Don't have an account?
                         <NavLink
                           to="/session/signup"
@@ -183,7 +216,7 @@ const ServiceLogin = () => {
                           }}>
                           Register
                         </NavLink>
-                      </Paragraph>
+                      </Paragraph> */}
                     </form>
                   )}
                 </Formik>

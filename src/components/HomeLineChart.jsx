@@ -2,16 +2,14 @@
  * @Description:
  * @Author: Tong Chen
  * @Date: 2022-08-21 20:55:35
- * @LastEditTime: 2022-08-21 21:38:01
+ * @LastEditTime: 2022-08-31 12:35:11
  * @LastEditors:
  */
 import { useTheme, Card } from '@mui/material'
 import ReactEcharts from 'echarts-for-react'
 
 const HomeLineChart = ({ height, color = [] }) => {
-  console.log('hello')
   const theme = useTheme()
-  console.log('theme', theme)
 
   const option = {
     grid: { top: '10%', bottom: '10%', left: '5%', right: '5%' },
