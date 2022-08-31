@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-21 02:51:28
- * @LastEditTime: 2022-08-30 19:13:32
+ * @LastEditTime: 2022-08-31 03:08:02
  * @LastEditors:  
  */
 
@@ -12,6 +12,7 @@ import { styled } from '@mui/material'
 import ActionAreaCard from "./Clock"
 import { centreStore } from '../store/centreStore'
 import { Provider } from 'react-redux'
+import { createContext, useContext, useState } from "react"
 
 const UpperBox = styled('div')(
   ({ theme }) => ({
@@ -20,7 +21,6 @@ const UpperBox = styled('div')(
     // marginRight: '20vw',
     marginTop: '30px',
     marginBottom: '30px',
-    // backgroundColor: 'black',
     zIndex: '9999',
     position: 'fixed',
     float: 'left',
@@ -28,20 +28,24 @@ const UpperBox = styled('div')(
   })
 )
 
+export const AuthContext = createContext()
+
 const HomeRoot = () => {
+  const initAuth = {
+    isLogin: false,
+    user: {}
+  }
+
   return (
-    <>
+    <AuthContext.Provider value={initAuth}>
       <PrimarySearchAppBar />
-      {/* <upperBox>
-        19:22 a.m.
-      </upperBox> */}
       <Provider store={centreStore}>
         <UpperBox>
           <ActionAreaCard />
         </UpperBox>
         <Outlet />
       </Provider>
-    </>
+    </AuthContext.Provider>
   )
 }
 

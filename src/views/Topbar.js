@@ -1,22 +1,20 @@
 import * as React from 'react'
 import { styled, alpha } from '@mui/material/styles'
-import AppBar from '@mui/material/AppBar'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
 import Toolbar from '@mui/material/Toolbar'
-import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
 import InputBase from '@mui/material/InputBase'
 import Badge from '@mui/material/Badge'
 import MenuItem from '@mui/material/MenuItem'
 import Menu from '@mui/material/Menu'
-import MenuIcon from '@mui/icons-material/Menu'
+import { AppBar, Button, Box, IconButton, Tooltip, Typography } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import AccountCircle from '@mui/icons-material/AccountCircle'
 import MailIcon from '@mui/icons-material/Mail'
 import NotificationsIcon from '@mui/icons-material/Notifications'
-import MoreIcon from '@mui/icons-material/MoreVert'
 import { useNavigate } from "react-router-dom"
+import UserMenuBox from "./UserMenuBox"
+import { AuthContext } from "./HomeRoot"
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -59,6 +57,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }))
 
 function PrimarySearchAppBar () {
+  const userAuth = React.useContext(AuthContext)
+
   const navigate = useNavigate()
   const pages = [
     {
@@ -76,7 +76,11 @@ function PrimarySearchAppBar () {
     {
       label: 'SERVICE',
       clickHandle: () => {
-        navigate('/service')
+        if (!userAuth.isLogin) {
+          navigate('/login')
+        } else {
+          navigate('/service')
+        }
       }
     }
   ]
@@ -102,6 +106,10 @@ function PrimarySearchAppBar () {
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget)
+  }
+
+  const handleLoginClick = () => {
+    navigate('/login')
   }
 
   const menuId = 'primary-search-account-menu'
@@ -182,22 +190,12 @@ function PrimarySearchAppBar () {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="sticky">
         <Toolbar>
-          {/* <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton> */}
           <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{
               display: { xs: 'none', sm: 'block', },
-              // fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
             }}
@@ -228,6 +226,13 @@ function PrimarySearchAppBar () {
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
+          {(userAuth.isLogin) ? <UserMenuBox /> : (
+            <Tooltip title="login" placement="top">
+              <IconButton sx={{ color: "#ffffff" }} size="50px" onClick={handleLoginClick}>
+                <AccountCircleIcon size="large" />
+              </IconButton>
+            </Tooltip>
+          )}
           {/* <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="error">
