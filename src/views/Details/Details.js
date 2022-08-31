@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-15 19:36:02
- * @LastEditTime: 2022-08-31 12:35:39
+ * @LastEditTime: 2022-08-31 16:18:38
  * @LastEditors:  
  */
 import LineChart from "../../components/LineChart"
@@ -18,8 +18,6 @@ import NewsBox from "./NewsBox"
 function DetailPage ({ centres, mans, doctors }) {
   const params = useParams()
   const curCentre = centres[params.id]
-
-  console.log("enter detail", mans)
 
   return (
     <div>
@@ -50,7 +48,7 @@ function DetailPage ({ centres, mans, doctors }) {
 
         </Grid>
 
-        <Grid item lg={4} md={4} sm={12} xs={12}>
+        <Grid item lg={4} md={4} sm={12} xs={4}>
           <Card sx={{ px: 3, py: 2, mb: 3 }}>
             <NewsBox deliveryInfo={curCentre.deliveryInfo} />
           </Card>

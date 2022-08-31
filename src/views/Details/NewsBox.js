@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-30 22:09:29
- * @LastEditTime: 2022-08-30 22:41:19
+ * @LastEditTime: 2022-08-31 15:38:39
  * @LastEditors:  
  */
 
@@ -55,36 +55,48 @@ export default function NewsBox ({ deliveryInfo }) {
       <H1>News</H1>
       <br></br>
       {deliveryInfo.length !== 0 ? deliveryInfo.map((item, index) => {
-        console.log("from ", item.man)
-        if (item.bool) {
+        if (item.doctor) {
           return (
             <div key={index}>
               <Icon color='success'>
                 <AddTaskIcon sx={{ fontSize: 25 }}></AddTaskIcon>
               </Icon>
-              <H3 display={"inline"} marginLeft={"9px"}>{item.amount} vaccines are deliveried!</H3>
-
-              <GreyTextBox>From {item.man}</GreyTextBox>
+              <H3 display={"inline"} marginLeft={"9px"}>Doctor {item.doctor} have informed people to come for vaccination...</H3>
+              {/* <GreyTextBox>From {item.man}</GreyTextBox> */}
               <GreyTextBox>{item.time}</GreyTextBox>
             </div>
           )
         } else {
-          return (
-            <div key={index}>
-              <Icon sx={{ color: "#ffa726" }}>
-                <LocalShippingOutlinedIcon sx={{ fontSize: 25 }}></LocalShippingOutlinedIcon>
-              </Icon>
-              <H3 display={"inline"} marginLeft={"9px"}>{item.amount} vaccines are on the way...</H3>
-              {index === deliveryInfo.length - 1 ? (
-                <BarBox>
-                  <LinearProgress variant="determinate" value={completed} />
-                </BarBox>
-              ) : null}
+          if (item.bool) {
+            return (
+              <div key={index}>
+                <Icon color='success'>
+                  <AddTaskIcon sx={{ fontSize: 25 }}></AddTaskIcon>
+                </Icon>
+                <H3 display={"inline"} marginLeft={"9px"}>{item.amount} vaccines are deliveried!</H3>
 
-              <GreyTextBox>From {item.man}</GreyTextBox>
-              <GreyTextBox>{item.time}</GreyTextBox>
-            </div>
-          )
+                <GreyTextBox>From {item.man}</GreyTextBox>
+                <GreyTextBox>{item.time}</GreyTextBox>
+              </div>
+            )
+          } else {
+            return (
+              <div key={index}>
+                <Icon sx={{ color: "#ffa726" }}>
+                  <LocalShippingOutlinedIcon sx={{ fontSize: 25 }}></LocalShippingOutlinedIcon>
+                </Icon>
+                <H3 display={"inline"} marginLeft={"9px"}>{item.amount} vaccines are on the way...</H3>
+                {index === deliveryInfo.length - 1 ? (
+                  <BarBox>
+                    <LinearProgress variant="determinate" value={completed} />
+                  </BarBox>
+                ) : null}
+
+                <GreyTextBox>From {item.man}</GreyTextBox>
+                <GreyTextBox>{item.time}</GreyTextBox>
+              </div>
+            )
+          }
         }
       }) : null}
     </>
