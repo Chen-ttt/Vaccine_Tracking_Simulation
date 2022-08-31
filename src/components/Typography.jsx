@@ -101,6 +101,9 @@ export const H4 = ({
       fontSize="16px"
       fontWeight="500"
       lineHeight="1.5"
+      display="inline-block"
+      position="absolute"
+      marginLeft="10px"
       {...props}>
       {children}
     </StyledBox>
