@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-13 17:11:16
- * @LastEditTime: 2022-08-30 22:29:23
+ * @LastEditTime: 2022-08-31 16:26:24
  * @LastEditors:  
  */
 
@@ -15,6 +15,10 @@ const initState = () => {
   }
 }
 
+const getCurTime = (timer) => {
+  return timer.day + " " + timer.month + " " + (timer.hour > 12 ? (timer.hour - 12) + "pm" : timer.hour + "am")
+}
+
 const vaccineReducer = (state = initState(), action) => {
   switch (action.type) {
     case 'GET_CENTRE': {
@@ -24,6 +28,7 @@ const vaccineReducer = (state = initState(), action) => {
         item.isRequesting = false // true means this centre has sent an request email
         item.isDeliverying = false // true means there are some vaccines delivery to this centre
         item.deliveryInfo = []
+        item.isReminding = false
       })
 
       return {
@@ -70,9 +75,17 @@ const vaccineReducer = (state = initState(), action) => {
         if (hour < 9 || hour > 19) item.rateComsumption = 0
         else if ((hour >= 9 && hour <= 12) || (hour > 14 && hour <= 17)) {
           item.rateComsumption = Math.floor(item.centreLevel + item.population * 0.01 + item.initVaccine * 0.02)
+
         }
         else if ((hour > 12 && hour <= 14) || (hour > 17 && hour <= 19)) {
           item.rateComsumption = Math.floor(item.centreLevel + item.population * 0.01 + item.initVaccine * 0.05)
+        }
+
+        if (item.isReminding) {
+          console.log("撑伞", item.name, item.rateComsumption)
+          item.rateComsumption *= 2
+          if (item.initVaccine < 40) item.isReminding = false
+          console.log(item.rateComsumption)
         }
 
         if (item.initVaccine === 0) {
@@ -120,7 +133,7 @@ const vaccineReducer = (state = initState(), action) => {
               man: state.manInfo[action.man].name,
               amount: action.amount,
               bool: false,
-              time: state.globalTimer.day + " " + state.globalTimer.month + " " + state.globalTimer.hour + "am"
+              time: getCurTime(state.globalTimer)
             }]
           }
         } else return item
@@ -136,30 +149,15 @@ const vaccineReducer = (state = initState(), action) => {
 
     case 'SEND_REQUEST': {
       console.log("enter send request reducer")
-      // let temp = state.centreInfo.map(item => {
-      //   console.log("idList", action.idList, "item.id", item.ID, "match?", action.idList.includes(item.ID))
-      //   if (action.idList.includes(item.ID)) {
-      //     console.log("send! centre id", item.ID)
-      //     return {
-      //       ...item,
-      //       isRequesting: true
-      //     }
-      //   } else return item
-      // })
 
       state.centreInfo.forEach(item => {
-        // console.log("idList", action.idList, "item.id", item.ID, "match?", action.idList.includes(item.ID))
         if (action.idList.includes(item.ID)) {
           console.log("send! centre id", item.ID)
           item.isRequesting = true
         }
       })
 
-      return state
-      // return {
-      //   ...state,
-      //   centreInfo: temp
-      // }
+      return state // no need to update views, just revise database
     }
 
     case 'DELIVERY_SENDED': {
@@ -174,7 +172,7 @@ const vaccineReducer = (state = initState(), action) => {
               man: state.manInfo[action.man].name,
               amount: action.amount,
               bool: true,
-              time: state.globalTimer.day + " " + state.globalTimer.month + " " + state.globalTimer.hour + "am"
+              time: getCurTime(state.globalTimer)
             }]
           }
         } else return item
@@ -186,6 +184,21 @@ const vaccineReducer = (state = initState(), action) => {
         ...state,
         centreInfo: temp
       }
+    }
+
+    case 'SEND_REMIND': {
+      console.log("enter SEND_REMIND")
+
+      const cur = state.centreInfo[action.obj.id]
+      cur.isReminding = true
+      cur.deliveryInfo.push({
+        doctor: action.obj.doctor,
+        time: getCurTime(state.globalTimer)
+      })
+
+      console.log("cur", cur)
+
+      return state
     }
 
     default: {

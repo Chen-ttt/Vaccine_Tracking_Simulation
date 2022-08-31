@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-25 23:45:14
- * @LastEditTime: 2022-08-31 13:59:53
+ * @LastEditTime: 2022-08-31 14:04:41
  * @LastEditors:  
  */
 import * as React from 'react'
@@ -25,7 +25,7 @@ export default function CustomizedSnackbars ({ state, message }) {
     setOpen(false)
   }
 
-  if (state === "info") message = "Login Successful!"
+  // if (state === "info") message = "Login Successful!"
   //     "success": () => (params.amount + " vaccines have been sent to " + params.centre)
 
   return (

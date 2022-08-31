@@ -48,13 +48,6 @@ const JWTRoot = styled(JustifyBox)(() => ({
   },
 }))
 
-// inital login credentials
-const initialValues = {
-  username: 's35wz',
-  password: 'dummyPass',
-  remember: true,
-}
-
 // form field validation schema
 const validationSchema = Yup.object().shape({
   password: Yup.string()
@@ -116,6 +109,13 @@ const ServiceLogin = () => {
     } catch (e) {
       setLoading(false)
     }
+  }
+
+  // inital login credentials
+  const initialValues = {
+    username: manInfo[0].username,
+    password: manInfo[0].password,
+    remember: true,
   }
 
   return (
