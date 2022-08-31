@@ -2,14 +2,14 @@
  * @Description: Route config
  * @Author: Tong Chen
  * @Date: 2022-08-02 00:30:29
- * @LastEditTime: 2022-08-22 04:19:09
+ * @LastEditTime: 2022-08-31 00:11:44
  * @LastEditors:  
  */
 
 import App from "../views/HomePage/App"
 import Root from "../views/Details/Root"
 import HomeRoot from "../views/HomeRoot"
-import { MenuButton } from "../views/MenuButton"
+import ServiceLogin from "../views/Service/Login"
 import HomeLineChart from "../components/HomeLineChart"
 import Service from "../service/Service"
 import DeliveryForm from "../service/DeliveryForm"
@@ -44,21 +44,15 @@ export default [
         element: Root,
         exact: true,
       },
+      {
+        path: '/login',
+        element: ServiceLogin
+      }
     ]
   },
   {
     path: '/test',
-    element: HomeLineChart,
+    element: ServiceLogin,
     exact: true,
-  },
-  // {
-  //   path: '/test1',
-  //   element: TestRoot,
-  //   exact: true,
-  // },
-  // {
-  //   path: '/test2',
-  //   element: PrimarySearchAppBar,
-  //   exact: true
-  // }
+  }
 ]

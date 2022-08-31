@@ -25,14 +25,15 @@ const ContentBox = styled(Box)(() => ({
 
 const BackgroundBox = styled('div')(() => ({
   backgroundImage: `url(${Background})`,
+  fontSize: '20px',
   width: '100vw',
-  height: '100vh',
+  height: '95vh',
 }))
 
 const JWTRoot = styled(JustifyBox)(() => ({
   zIndex: 9999,
   background: 'rgba(255, 255, 255, 0.3)',
-  minHeight: '100vh !important',
+  minHeight: '95vh !important',
   '& .card': {
     maxWidth: '100vw',
     minHeight: 400,
