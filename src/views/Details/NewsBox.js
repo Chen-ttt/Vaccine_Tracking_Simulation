@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-30 22:09:29
- * @LastEditTime: 2022-08-31 15:38:39
+ * @LastEditTime: 2022-08-31 19:04:36
  * @LastEditors:  
  */
 
@@ -33,8 +33,8 @@ const BarBox = styled('div')(
 )
 
 export default function NewsBox ({ deliveryInfo }) {
-  const [completed, setCompleted] = React.useState(20)
 
+  const [completed, setCompleted] = React.useState(20)
   React.useEffect(() => {
     function progress () {
       if (completed !== 100) {
@@ -85,7 +85,7 @@ export default function NewsBox ({ deliveryInfo }) {
                 <Icon sx={{ color: "#ffa726" }}>
                   <LocalShippingOutlinedIcon sx={{ fontSize: 25 }}></LocalShippingOutlinedIcon>
                 </Icon>
-                <H3 display={"inline"} marginLeft={"9px"}>{item.amount} vaccines are on the way...</H3>
+                <H2 display={"inline"} marginLeft={"9px"}>{item.amount} vaccines are on the way...</H2>
                 {index === deliveryInfo.length - 1 ? (
                   <BarBox>
                     <LinearProgress variant="determinate" value={completed} />
@@ -98,7 +98,7 @@ export default function NewsBox ({ deliveryInfo }) {
             )
           }
         }
-      }) : null}
+      }) : <img src="/icon/news.png" width="100%" alt="" />}
     </>
   )
 }
