@@ -2,7 +2,7 @@
  * @Description: Render A List of Centre Cards with Responsive Data
  * @Author: Tong Chen
  * @Date: 2022-07-18 18:00:33
- * @LastEditTime: 2022-08-31 13:55:28
+ * @LastEditTime: 2022-08-31 17:45:05
  * @LastEditors:  
  */
 
@@ -10,7 +10,7 @@ import React from 'react'
 import { useEffect, useRef } from "react"
 import { createRoot } from 'react-dom/client'
 import { Box, styled, Grid, Card, Button, IconButton, Tooltip, Icon } from '@mui/material'
-import { Small, H3, H6 } from '../../components/Typography'
+import { Small, H3, H6, H2 } from '../../components/Typography'
 import CustomizedSnackbars from '../../components/MessageBar'
 import { connect } from 'react-redux'
 import { clearAction } from '../../actions/consumeAction'
@@ -100,7 +100,7 @@ function CenterCard (props) {
               <Grid container spacing={3}>
                 <Grid item xs={9}>
                   <Box>
-                    <H3>{item.name}</H3>
+                    <H2>{item.name}</H2>
                     <Small>{item.openTime}</Small>
                     <br></br>
                     {item.initVaccine ? (

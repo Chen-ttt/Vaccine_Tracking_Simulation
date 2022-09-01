@@ -23,8 +23,8 @@ export const H1 = ({
       component="h1"
       mb={0}
       mt={0}
-      fontSize="28px"
-      fontWeight="500"
+      fontSize="1.6rem"
+      fontWeight="700"
       lineHeight="1.5"
       // color={'#ffffff'}
       {...props}>
@@ -48,9 +48,8 @@ export const H2 = ({
       component="h2"
       mb={0}
       mt={0}
-      fontSize="24px"
-      fontWeight="500"
-      lineHeight="1.5"
+      fontSize="1.2rem"
+      fontWeight="600"
       {...props}>
       {children}
     </StyledBox>
@@ -72,9 +71,8 @@ export const H3 = ({
       component="h3"
       mb={0}
       mt={0}
-      fontSize="1.1rem"
+      fontSize="1.3rem"
       fontWeight="600"
-      // lineHeight="1.5"
       {...props}>
       {children}
     </StyledBox>

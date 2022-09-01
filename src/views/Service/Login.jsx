@@ -125,17 +125,13 @@ const ServiceLogin = () => {
         <Card className="card">
           <Grid container>
             <Grid item sm={6} xs={12}>
-              <JustifyBox p={4} height="100%" sx={{ minWidth: 320 }}>
-                <img
-                  src="/assets/images/illustrations/dreamer.svg"
-                  width="100%"
-                  alt=""
-                />
+              <JustifyBox p={4} height="80%" sx={{ minWidth: 320 }}>
+                <img src="/icon/login.png" width="380px" alt="" />
               </JustifyBox>
             </Grid>
 
             <Grid item sm={6} xs={12}>
-              <ContentBox>
+              <ContentBox marginTop="3vh">
                 <Formik
                   onSubmit={handleFormSubmit}
                   initialValues={initialValues}

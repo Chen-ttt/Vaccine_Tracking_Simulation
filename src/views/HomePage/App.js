@@ -2,7 +2,7 @@
  * @Description: Overview Page for User with Responsive Data
  * @Author: Tong Chen
  * @Date: 2022-07-18 16:37:01
- * @LastEditTime: 2022-08-30 18:09:03
+ * @LastEditTime: 2022-08-31 18:40:39
  * @LastEditors:  
  */
 
@@ -13,6 +13,7 @@ import PieChart from './PieChart'
 import BookCard from './BookCard'
 // import Campaigns from './Campaigns'
 import HomeLineChart from '../../components/HomeLineChart'
+import { useNavigate } from "react-router-dom"
 
 export const ContentBox = styled('div')(
   ({ theme }) => ({
@@ -53,7 +54,10 @@ const StyledButton = styled(Button)(({ theme }) => ({
 
 function App () {
   const { palette } = useTheme()
-  // console.log("rem", rem)
+  const navigate = useNavigate()
+  const handleViewMore = () => {
+    navigate('/centres')
+  }
 
   return (
     <Fragment>
@@ -81,7 +85,7 @@ function App () {
           </Grid>
 
           <Grid item xs={12}>
-            <StyledButton variant="outlined" color="primary">
+            <StyledButton variant="outlined" color="primary" onClick={handleViewMore}>
               View More
             </StyledButton>
           </Grid>
