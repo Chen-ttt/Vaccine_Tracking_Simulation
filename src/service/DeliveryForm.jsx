@@ -28,17 +28,17 @@ const DeliveryForm = ({ centreInfo, delivery, supplied }) => {
     event.preventDefault()
     console.log('Form submitted', event.target)
 
-    // emailjs
-    //   .sendForm('gmail', 'template_utnmhlb', event.target, 'Ah0EiXaVqDkRWJm24')
-    //   .then(
-    //     (result) => {
-    //       console.log('Delivery Remind email send!')
-    //     },
-    //     (error) => {
-    //       console.log(error.text)
-    //     }
-    //   )
-    console.log('skip email')
+    emailjs
+      .sendForm('gmail', 'template_utnmhlb', event.target, 'Ah0EiXaVqDkRWJm24')
+      .then(
+        (result) => {
+          console.log('Delivery Remind email send!')
+        },
+        (error) => {
+          console.log(error.text)
+        }
+      )
+    // console.log('skip email')
     delivery(Number(amount), Number(params.id), 0)
 
     setTimeout(() => {

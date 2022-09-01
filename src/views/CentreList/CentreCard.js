@@ -2,7 +2,7 @@
  * @Description: Render A List of Centre Cards with Responsive Data
  * @Author: Tong Chen
  * @Date: 2022-07-18 18:00:33
- * @LastEditTime: 2022-08-31 17:45:05
+ * @LastEditTime: 2022-09-01 11:50:26
  * @LastEditors:  
  */
 
@@ -65,6 +65,7 @@ function CenterCard (props) {
   }
 
   useEffect(() => {
+    console.log("enter userEffect", msgBar)
     if (msgBar === null) {
       setDivCom(createRoot(msgDivRef.current)) // initail the div component
     }
@@ -145,7 +146,7 @@ function CenterCard (props) {
         )) : null}
       </Grid>
 
-      <Button
+      {/* <Button
         size="small"
         height="10"
         padding="24px"
@@ -154,7 +155,7 @@ function CenterCard (props) {
         sx={{ textTransform: 'uppercase' }}
         onClick={() => clearTimer()}>
         STOP
-      </Button>
+      </Button> */}
     </>
   )
 }

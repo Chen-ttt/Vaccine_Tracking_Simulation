@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-24 22:16:13
- * @LastEditTime: 2022-09-01 01:37:59
+ * @LastEditTime: 2022-09-01 11:36:47
  * @LastEditors:  
  */
 import emailjs from 'emailjs-com'
@@ -31,22 +31,23 @@ const requestAction = () => {
 
     centreInfo.forEach(item => {
       // First time to detect the vaccines are not enough, send a request email
-      if (item.initVaccine < 20 && !item.isRequesting && !item.isDeliverying) {
+      if (item.initVaccine < 20 && !item.isRequesting && !item.isDeliverying && item.ID < 6) {
         const params = {
           centre_name: item.name,
           to_name: manInfo[item.manList[0]].name,
-          to_email: manInfo[item.manList[0]].email
+          to_email: manInfo[item.manList[0]].email,
+          username: manInfo[item.manList[0]].username,
+          password: manInfo[item.manList[0]].password
         }
 
-
-        // emailjs.send('gmail', 'template_v8xa3qe', params, 'Ah0EiXaVqDkRWJm24')
-        //   .then((result) => {
-        //     console.log("Already send request email!")
-        //     ids.push(item.ID)
-        //   })
-        //   .catch((error) => {
-        //     console.log("error", error.text)
-        //   })
+        emailjs.send('gmail', 'template_v8xa3qe', params, 'Ah0EiXaVqDkRWJm24')
+          .then((result) => {
+            console.log("Already send request email!")
+            ids.push(item.ID)
+          })
+          .catch((error) => {
+            console.log("error", error.text)
+          })
 
         console.log("Already send a request email")
         ids.push(item.ID)
@@ -63,13 +64,13 @@ const requestAction = () => {
 
         // console.log("item.reminding", item.isReminding)
 
-        // emailjs.send('gmail', 'template_lsk9lmi', params, 'Ah0EiXaVqDkRWJm24')
-        //   .then((result) => {
-        //     console.log("Already send remind email to doctor!")
-        //   })
-        //   .catch((error) => {
-        //     console.log("error", error.text)
-        //   })
+        emailjs.send('gmail', 'template_lsk9lmi', params, 'Ah0EiXaVqDkRWJm24')
+          .then((result) => {
+            console.log("Already send remind email to doctor!")
+          })
+          .catch((error) => {
+            console.log("error", error.text)
+          })
 
         dispatch(sendRemind({
           id: item.ID,
