@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-20 23:53:05
- * @LastEditTime: 2022-08-22 01:48:52
+ * @LastEditTime: 2022-08-31 16:40:22
  * @LastEditors:  
  */
 import * as echarts from "echarts"
@@ -31,5 +31,3 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps)(LineChart)
-
-// export default LineChart

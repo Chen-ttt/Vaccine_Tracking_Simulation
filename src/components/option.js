@@ -15,11 +15,8 @@ let configOptions = (remainLine, rateLine) => {
   let echartData = createData(remainLine, rateLine)
 
   let xAxisData = echartData.map((v) => v.name)
-  //  ["1", "2", "3", "4", "5", "6", "7", "8"]
   let yAxisData1 = echartData.map((v) => v.value1)
-  // [100, 138, 350, 173, 180, 150, 180, 230]
   let yAxisData2 = echartData.map((v) => v.value2)
-  // [233, 233, 200, 180, 199, 233, 210, 180]
   const hexToRgba = (hex, opacity) => {
     let rgbaColor = ""
     let reg = /^#[\da-f]{6}$/i
@@ -47,10 +44,10 @@ let configOptions = (remainLine, rateLine) => {
           html += `<div style="color: #666;font-size: 14px;line-height: 24px">
                   <span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:${color[v.componentIndex]
             };"></span>
-                  ${v.seriesName}.${v.name}
+                  ${v.seriesName}
                   <span style="color:${color[v.componentIndex]
             };font-weight:700;font-size: 18px">${v.value}</span>
-                  万元`
+                  doses`
         })
 
         return html
@@ -91,7 +88,7 @@ let configOptions = (remainLine, rateLine) => {
     yAxis: [
       {
         type: "value",
-        name: "Vaccine Comsumption",
+        name: "Vaccine Tracking",
         axisLabel: {
           textStyle: {
             color: "#666",
@@ -118,10 +115,9 @@ let configOptions = (remainLine, rateLine) => {
     ],
     series: [
       {
-        name: "remain vaccine",
+        name: "Remain Vaccine",
         type: "line",
         smooth: true,
-        // showSymbol: false,/
         symbolSize: 8,
         zlevel: 3,
         lineStyle: {
@@ -158,7 +154,7 @@ let configOptions = (remainLine, rateLine) => {
         data: yAxisData1,
       },
       {
-        name: "consumption rate",
+        name: "Consumption Rate",
         type: "line",
         smooth: true,
         // showSymbol: false,
