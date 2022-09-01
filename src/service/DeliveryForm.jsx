@@ -65,6 +65,7 @@ const DeliveryForm = ({ centreInfo, delivery, supplied }) => {
         <Grid container spacing={6}>
           <Grid item lg={12} md={12} sm={12} xs={12} sx={{ mt: 2 }}>
             <H4> Send to {centreName}</H4>
+            <br />
             <br></br>
             <TextField
               type="text"
@@ -115,7 +116,6 @@ const DeliveryForm = ({ centreInfo, delivery, supplied }) => {
         </Grid>
 
         <Button color="primary" variant="contained" type="submit">
-          {/* <Icon>send</Icon> */}
           <Span sx={{ pl: 0, textTransform: 'capitalize' }}>Submit</Span>
         </Button>
       </ValidatorForm>

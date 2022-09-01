@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-24 22:16:13
- * @LastEditTime: 2022-08-31 16:21:53
+ * @LastEditTime: 2022-09-01 01:15:04
  * @LastEditors:  
  */
 import emailjs from 'emailjs-com'
@@ -63,13 +63,13 @@ const requestAction = () => {
 
         // console.log("item.reminding", item.isReminding)
 
-        emailjs.send('gmail', 'template_lsk9lmi', params, 'Ah0EiXaVqDkRWJm24')
-          .then((result) => {
-            console.log("Already send remind email to doctor!")
-          })
-          .catch((error) => {
-            console.log("error", error.text)
-          })
+        // emailjs.send('gmail', 'template_lsk9lmi', params, 'Ah0EiXaVqDkRWJm24')
+        //   .then((result) => {
+        //     console.log("Already send remind email to doctor!")
+        //   })
+        //   .catch((error) => {
+        //     console.log("error", error.text)
+        //   })
 
         dispatch(sendRemind({
           id: item.ID,
