@@ -215,7 +215,7 @@ function PrimarySearchAppBar () {
           </Box>
 
           <Box sx={{ flexGrow: 3 }} />
-          <Search>
+          {/* <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -223,7 +223,7 @@ function PrimarySearchAppBar () {
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
             />
-          </Search>
+          </Search> */}
           <Box sx={{ flexGrow: 1 }} />
           {(userAuth.isLogin) ? <UserMenuBox /> : (
             <Tooltip title="login" placement="top">

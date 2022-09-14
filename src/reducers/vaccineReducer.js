@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-13 17:11:16
- * @LastEditTime: 2022-08-31 16:26:24
+ * @LastEditTime: 2022-09-14 01:20:20
  * @LastEditors:  
  */
 
@@ -27,8 +27,8 @@ const vaccineReducer = (state = initState(), action) => {
         item.rateLine = [item.rateComsumption]
         item.isRequesting = false // true means this centre has sent an request email
         item.isDeliverying = false // true means there are some vaccines delivery to this centre
-        item.deliveryInfo = []
-        item.isReminding = false
+        item.isReminding = false // true means this centre has sent an reminder email
+        item.deliveryInfo = [] // Array includes different delivery and reminder news
       })
 
       return {
@@ -44,6 +44,7 @@ const vaccineReducer = (state = initState(), action) => {
     }
 
     case 'GET_MANUFACTURER': {
+      console.log("test", action.manInfo)
       return {
         ...state,
         manInfo: action.manInfo
@@ -82,10 +83,8 @@ const vaccineReducer = (state = initState(), action) => {
         }
 
         if (item.isReminding) {
-          console.log("撑伞", item.name, item.rateComsumption)
           item.rateComsumption *= 2
           if (item.initVaccine < 40) item.isReminding = false
-          console.log(item.rateComsumption)
         }
 
         if (item.initVaccine === 0) {

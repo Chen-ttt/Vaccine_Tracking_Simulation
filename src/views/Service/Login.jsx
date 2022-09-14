@@ -114,7 +114,8 @@ const ServiceLogin = () => {
   // inital login credentials
   const initialValues = {
     username: manInfo[0].username,
-    password: manInfo[0].password,
+    // password: manInfo[0].password,
+    password: '000000',
     remember: true,
   }
 
@@ -201,18 +202,6 @@ const ServiceLogin = () => {
                         sx={{ my: 2 }}>
                         Login
                       </LoadingButton>
-
-                      {/* <Paragraph>
-                        Don't have an account?
-                        <NavLink
-                          to="/session/signup"
-                          style={{
-                            color: '#0288d1',
-                            marginLeft: 5,
-                          }}>
-                          Register
-                        </NavLink>
-                      </Paragraph> */}
                     </form>
                   )}
                 </Formik>

@@ -2,13 +2,12 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-15 19:36:02
- * @LastEditTime: 2022-08-31 16:18:38
+ * @LastEditTime: 2022-09-14 14:33:28
  * @LastEditors:  
  */
 import LineChart from "../../components/LineChart"
 import { useParams } from "react-router-dom"
 import { connect } from 'react-redux'
-// import { CardRoot, StyledCard } from '../../components/CardStyle'
 import { Card, Grid } from '@mui/material'
 import { InforBox } from "./InforBox"
 import ManBox from "./ManBox"
