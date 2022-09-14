@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-31 03:01:43
- * @LastEditTime: 2022-08-31 18:14:28
+ * @LastEditTime: 2022-09-14 00:16:03
  * @LastEditors:  
  */
 import * as React from 'react'
@@ -19,6 +19,7 @@ export default function GroupAvatars ({ maxNum }) {
       <Avatar alt="Cindy Baker" src="/user/3.png" />
       <Avatar alt="Agnes Walker" src="/user/4.png" />
       <Avatar alt="Trevor Henderson" src="/user/5.png" />
+      <Avatar alt="Trevor Henderson" src="/user/6.png" />
     </AvatarGroup>
   )
 }
